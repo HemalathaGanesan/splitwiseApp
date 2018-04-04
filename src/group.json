@@ -1,0 +1,26 @@
+[{
+	"id":11,
+	"group_name":"Demo",
+	"group_type":"monthly",
+	"group_members":[1,2,3],
+	"expenses":[{
+		"amount":100,
+		"paidBy":1,
+		"splitType":"equally",
+		"participants":[1,2,3],
+		"description":"some expences"
+	}]
+},{
+	"id":12,
+	"group_name":"fun",
+	"group_type":"monthly",
+	"group_members":[1,2,3],
+	
+	"expenses":[{
+		"amount":100,
+		"paidBy":2,
+		"splitType":"equally",
+		"participants":[1,2,3],
+		"description":"some expences"
+	}]
+}]
