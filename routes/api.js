@@ -21,7 +21,6 @@ router.post('/signup',function(req,res){
 router.post('/login',function(req,res){
     let email = req.body.email;
     let password = req.body.password;
-    //console.log(email, password)
     User.findOne({ email:email }).then((data)=>{
         if(email === data.email && password === data.password){
             res.send({
@@ -39,6 +38,5 @@ router.post('/login',function(req,res){
         })
     })
 })
-
 
 module.exports=router

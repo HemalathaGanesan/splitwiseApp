@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Users from '../users';
 import 'semantic-ui-css/semantic.min.css';
 import { Button } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
@@ -10,17 +9,6 @@ class Homepage extends React.Component {
     isValidate() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('pwd').value;
-        //console.log('i am here');
-        // for (var i = 0; i < Users.length; i++) {
-        //     if (Users[i].email.toString() === email && Users[i].password.toString() === password) {
-        //         console.log(Users[i]);
-        //         // <Redirect to='/dashboard'/>
-        //         window.location.href='/dashboard';
-        //         return null;
-        //     }
-        // }
-        // alert('Invalid User')
-        // console.log('invalid email/password')
         let data = {
             email : email,
             password : password
@@ -35,13 +23,12 @@ class Homepage extends React.Component {
         .then((response) => {
             if(response.status === 'successful'){
                 window.location.href='/dashboard'
+            }else{
+                alert('Invalid User');
             }
         })
     }
     render() {
-
-        //console.log(Users);
-
         return (
             <div className = 'container'>
                 <div id="login-box">

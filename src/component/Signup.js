@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Users from '../users';
 import 'semantic-ui-css/semantic.min.css';
 import { Button } from 'semantic-ui-react';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
