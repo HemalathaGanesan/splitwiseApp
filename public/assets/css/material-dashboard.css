@@ -23,10 +23,16 @@
 
 /* Shadows (from mdl http://www.getmdl.io/) */
 
+.row1 .btn-round{
+width:30%;
+}
+.row1 .btn.btn-primary{
+    background-color: #3b9b9c;
+}
 .noUi-target,
 .noUi-target * {
     -webkit-touch-callout: none;
-    -ms-touch-action: none;
+    /* -ms-touch-action: none; */
     user-select: none;
     box-sizing: border-box;
 }
@@ -620,7 +626,7 @@ h2.title {
 }
 
 .text-warning {
-    color: #ff9800;
+    color: #a02695;
 }
 
 .text-primary {
@@ -959,7 +965,7 @@ h2.title {
     border-radius: 3px;
     position: relative;
     padding: 12px 30px;
-    margin: 10px 1px;
+    margin: 10px 20px;
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
@@ -2932,9 +2938,9 @@ fieldset[disabled] .form-group .form-control {
     margin-top: -11px;
 }
 
-.form-group select {
+/* .form-group select {
     appearance: none;
-}
+} */
 
 .form-group select~.material-input:after {
     display: none;
@@ -4255,7 +4261,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
     border-radius: 10px;
     text-align: center;
     line-height: 19px;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     display: block;
 }
 
@@ -4819,13 +4825,13 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 
 @media (max-width: 1199px) {
-    .navbar {
-        /*
+    /* .navbar {
+        
         .navbar-form {
           margin-top: 10px;
         }
-    */
-    }
+    
+    } */
     .navbar .navbar-brand {
         height: 50px;
         padding: 10px 15px;
@@ -5148,7 +5154,7 @@ footer .btn {
 }
 
 .card .card-header {
-    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); */
     margin: -20px 15px 0;
     border-radius: 3px;
     padding: 15px;
@@ -5303,9 +5309,9 @@ footer .btn {
     box-shadow: 0 12px 20px -10px rgba(76, 175, 80, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80, 0.2);
 }
 
-.card [data-background-color="orange"] {
-    background: linear-gradient(60deg, #ffa726, #fb8c00);
-    box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+.card [data-background-color="purple"] {
+    background: linear-gradient(60deg, #ab47bc, #8e24aa);
+    box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
 }
 
 .card [data-background-color="red"] {
@@ -6681,9 +6687,9 @@ footer .btn {
     .dropdown-menu {
         display: none;
     }
-    .navbar-fixed-top {
+    /* .navbar-fixed-top {
         -webkit-backface-visibility: hidden;
-    }
+    } */
     #bodyClick {
         height: 100%;
         width: 100%;
