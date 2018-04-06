@@ -38,13 +38,13 @@ class Expenses extends React.Component{
               <li>
                 <a href="#">
                   <i className="material-icons">library_books</i>
-                  <p>Groups List</p>
+                  <p>Groups</p>
                 </a>
               </li>
               <li>
                 <a href="#">
                   <i className="material-icons">group</i>
-                  <p>Friend List</p>
+                  <p>Friends</p>
                 </a>
               </li>
             </ul>

@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-// import Dashboard from './component/Dashboard';
 import Dashboard from "./component/dashboard";
 import Innerdashboard from "./component/innerdashboard";
 import Profile from "./component/userprofile";

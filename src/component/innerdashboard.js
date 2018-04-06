@@ -16,19 +16,19 @@ class Innerdashboard extends React.Component {
           <div className="sidebar-wrapper">
             <ul className="nav">
               <li className="active">
-                <a href="http://localhost:3000/dashboard">
+                <a href="/dashboard">
                   <i className="material-icons">dashboard</i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li>
-                <a href="http://localhost:3000/profile">
+                <a href="/profile">
                   <i className="material-icons">person</i>
                   <p>User Profile</p>
                 </a>
               </li>
               <li>
-                <a href="./table.html">
+                <a href="/expenses">
                   <i className="material-icons">content_paste</i>
                   <p>All Expenses</p>
                 </a>
@@ -36,13 +36,13 @@ class Innerdashboard extends React.Component {
               <li>
                 <a href="#">
                   <i className="material-icons">library_books</i>
-                  <p>Groups List</p>
+                  <p>Groups</p>
                 </a>
               </li>
               <li>
                 <a href="#">
                   <i className="material-icons">group</i>
-                  <p>Friend List</p>
+                  <p>Friends</p>
                 </a>
               </li>
             </ul>
@@ -133,38 +133,13 @@ class Innerdashboard extends React.Component {
                   <div class="card-content table-responsive">
                     <table class="table table-hover">
                       <thead class="text-warning">
-                        <th>ID</th>
-                        <th>Name</th>
                         <th>Totalbalance</th>
                         <th>you owe</th>
                         <th>you are owed</th>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>1</td>
-                          <td>Dakota Rice</td>
                           <td>$36,738</td>
-                          <td>$36,738</td>
-                          <td>$0.00</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Minerva Hooper</td>
-                          <td>$23,789</td>
-                          <td>$36,738</td>
-                          <td>$0.00</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Sage Rodriguez</td>
-                          <td>$56,142</td>
-                          <td>$36,738</td>
-                          <td>$0.00</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Philip Chaney</td>
-                          <td>$38,735</td>
                           <td>$36,738</td>
                           <td>$0.00</td>
                         </tr>
