@@ -64,4 +64,8 @@ input[type='email'],[type='password']{
 .block-1,.block-2, .block-3{
   margin-top:20px;
 }
-
+.error-message{
+  color: red;
+  font-size: 25px;
+  padding: 10px;
+}

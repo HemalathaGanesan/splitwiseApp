@@ -5,6 +5,12 @@ import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import Dashboard from '../component/Dashboard';
 
 class Homepage extends React.Component {
+    constructor(){
+        super();
+        this.state={
+            errorMessage : ''
+        }
+    }
    
     isValidate() {
         const email = document.getElementById('email').value;
@@ -24,7 +30,9 @@ class Homepage extends React.Component {
             if(response.status === 'successful'){
                 window.location.href='/dashboard'
             }else{
-                alert('Invalid User');
+                this.setState({
+                    errorMessage : 'Invalid email/password....!!!'
+                })
             }
         })
     }
@@ -36,6 +44,7 @@ class Homepage extends React.Component {
                     <p className = 'label'>Enter your email : <input type='email' id='email'/></p>
                     <p className = 'label'>Enter your Password : <input type = 'password' id='pwd'/></p>
                     <Button color ='twitter' fluid ={true} size = 'huge' onClick={this.isValidate.bind(this)}>LogIn</Button>
+                    <div className = 'error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>
                 </div>
             </div>
