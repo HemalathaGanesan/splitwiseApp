@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import Users from '../users';
 import 'semantic-ui-css/semantic.min.css';
 import { Button } from 'semantic-ui-react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
+import Dashboard from '../component/Dashboard';
 
 class Homepage extends React.Component {
+   
     isValidate() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('pwd').value;
         for (var i = 0; i < Users.length; i++) {
             if (Users[i].email.toString() === email && Users[i].password.toString() === password) {
                 console.log(Users[i]);
-                return
+                // <Redirect to='/dashboard'/>
+                window.location.href='/dashboard';
+                return null;
             }
         }
+        alert('Invalid User')
         console.log('invalid email/password')
     }
     render() {
