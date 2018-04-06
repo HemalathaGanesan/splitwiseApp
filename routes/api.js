@@ -3,17 +3,15 @@ const router=express.Router();
 const User = require('../Models/user');
 
 router.post('/signup',function(req,res){
-    let password=req.body.password;
-    console.log(password,'called');
-
+    console.log(req.body.name,req.body.email)
     User.create({
-        username : req.body.username,
+        username : req.body.name,
         email : req.body.email,
         password : req.body.password
     }).then(() => {
         res.send({
             status:'successful',
-            groupName:req.body.username
+            Name:req.body.name
         })
     })    
 })
