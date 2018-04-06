@@ -10,16 +10,33 @@ class Homepage extends React.Component {
     isValidate() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('pwd').value;
-        for (var i = 0; i < Users.length; i++) {
-            if (Users[i].email.toString() === email && Users[i].password.toString() === password) {
-                console.log(Users[i]);
-                // <Redirect to='/dashboard'/>
-                window.location.href='/dashboard';
-                return null;
-            }
+        //console.log('i am here');
+        // for (var i = 0; i < Users.length; i++) {
+        //     if (Users[i].email.toString() === email && Users[i].password.toString() === password) {
+        //         console.log(Users[i]);
+        //         // <Redirect to='/dashboard'/>
+        //         window.location.href='/dashboard';
+        //         return null;
+        //     }
+        // }
+        // alert('Invalid User')
+        // console.log('invalid email/password')
+        let data = {
+            email : email,
+            password : password
         }
-        alert('Invalid User')
-        console.log('invalid email/password')
+        fetch('http://localhost:8080/api/login', {
+            method: 'POST',
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: new Headers({
+              'Content-Type': 'application/json'
+            })
+        }).then((response) => response.json())
+        .then((response) => {
+            if(response.status === 'successful'){
+                window.location.href='/dashboard'
+            }
+        })
     }
     render() {
 
