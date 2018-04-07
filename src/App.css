@@ -69,3 +69,8 @@ input[type='email'],[type='password']{
   font-size: 25px;
   padding: 10px;
 }
+.success-message{
+  color: green;
+  font-size: 30px;
+  padding: 10px;
+}
