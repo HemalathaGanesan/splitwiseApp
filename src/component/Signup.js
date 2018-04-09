@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Button } from 'semantic-ui-react';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
@@ -38,7 +38,7 @@ class Signup extends React.Component{
     }
     render(){
         return (
-            <div className = 'container'>
+            <div className = 'container1'>
                 <div id="signup-box">
                     <h1>Create an account</h1>
                     <p className = 'label'>Enter your name : <input type='email' id='name' /></p>

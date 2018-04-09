@@ -3,22 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+
+    "bootstrap": "^4.0.0",
+    "express": "^4.16.3",
     "material-ui": "^0.20.0",
     "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "mongoose": "^5.0.12",
     "body-parser": "^1.18.2",
-    "express": "^4.16.3",
     "path": "^0.12.7",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.79.1"
+
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:mountblue/feb-18-js/splitxpenz.git"
+  },
+  "author": "",
+  "license": "ISC"
 }

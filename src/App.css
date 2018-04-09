@@ -1,4 +1,4 @@
-*{
+ /*  *{
   margin: 0px;
   padding: 0px;
 }
@@ -24,9 +24,9 @@ input[type='email'],[type='password']{
  .header{
   height : 100px;
   box-shadow: 5px 5px 5px;
-  /* background-color: rgb(183, 79, 218) */
+  
  }
-.container{
+.container1{
   display: grid;
   justify-content: center;
   padding-top: 50px;
@@ -42,7 +42,6 @@ input[type='email'],[type='password']{
 }
 .dashboard{
   display: flex;
-  /* margin: 20px; */
   background-color:aliceblue;
  
 }
@@ -73,4 +72,5 @@ input[type='email'],[type='password']{
   color: green;
   font-size: 30px;
   padding: 10px;
-}
+} 
+*/

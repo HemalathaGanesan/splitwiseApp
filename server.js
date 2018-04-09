@@ -9,6 +9,9 @@ app.use(function(req,res,next){
   next();
 });
 
+const routes=require('./routers/api')
+app.use('/api',routes);
+
 mongoose.connect('mongodb://localhost/splitxpenz');
 mongoose.connection.once('open',function(){
     console.log("connection success");

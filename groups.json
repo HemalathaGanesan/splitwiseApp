@@ -1,0 +1,23 @@
+[
+  {
+    "date": "Apr 3",
+    "group_name": "friendsGroup",
+    "description": "coffee",
+    "you_paid": "100",
+    "you_lent": "50"
+  },
+  {
+    "date": "Apr 4",
+    "group_name": "RoomMate",
+    "description": "Lunch",
+    "you_paid": "350",
+    "you_lent": "200"
+  },
+  {
+    "date": "Apr 5",
+    "group_name": "CollegeTrip",
+    "description": "movie",
+    "you_paid": "220",
+    "you_lent": "50"
+  }
+]

@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Homepage from './component/Homepage';
 import Header from './component/Header';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import {BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import Signup from './component/Signup';
-import Dashboard from './component/Dashboard';
+import Dashboard from "./component/dashboard";
+import Innerdashboard from "./component/innerdashboard";
+import Profile from "./component/userprofile";
+import Expenses from './component/allexpenses'
+import Group from './component/group'
+import Friend from './component/friend'
 
-class App extends Component {
-
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -34,7 +37,12 @@ class App extends Component {
                 );
               }
             }/>
-            <Route path="/dashboard" exact component={Dashboard}/>
+            <Route path="/main" component={Dashboard} />
+            <Route path="/dashboard" component={Innerdashboard} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/expenses" component={Expenses} />
+            <Route path="/group" component={Group} />
+            <Route path="/friend" component={Friend} />
           </div>
         </Router>
       </div>

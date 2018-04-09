@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Button } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
-import Dashboard from '../component/Dashboard';
+import Dashboard from '../component/dashboard';
 
 class Homepage extends React.Component {
     constructor(){
@@ -40,14 +40,14 @@ class Homepage extends React.Component {
             }
         })
     }
-    renderRedirect = () => {
+    renderRedirect = () =>{
         if (this.state.redirect) {
           return <Redirect to='/dashboard' />
         }
       }
     render() {
         return (
-            <div className = 'container'>
+            <div className = 'container1'>
                 <div id="login-box">
                     <h1>LogIn Page</h1>
                     <p className = 'label'>Enter your email : <input type='email' id='email'/></p>
