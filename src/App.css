@@ -1,21 +1,8 @@
- /*  *{
+*{
   margin: 0px;
   padding: 0px;
 }
-
-h1{
-  font-family: monospace;
-  font-size: 30px;
-  text-align: center;
-}
-input[type='email'],[type='password']{
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.logo{
+.logo-img{
   width:30%;
   height: 100%;
   padding:0px 0px 0px 10%;
@@ -26,51 +13,23 @@ input[type='email'],[type='password']{
   box-shadow: 5px 5px 5px;
   
  }
-.container1{
-  display: grid;
-  justify-content: center;
-  padding-top: 50px;
+.login-box{
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 35%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
 }
-.label{
-  font-size: 24px;
-  font-family: serif;
-}
-.query{
-  padding-top: 20px;
-  font-size: 20px;
-  font-family: sans-serif;
-}
-.dashboard{
-  display: flex;
-  background-color:aliceblue;
- 
-}
-.left-side{
-  width: 20%;
-  background-color: darkgray;
-  height: 550px;
-  
-}
-.right-side{
-  width:80%;
-}
-.balance{
-  display: flex;
-  justify-content: space-around;
-  background-color: goldenrod;
-  height: 96px;
-}
-.block-1,.block-2, .block-3{
-  margin-top:20px;
-}
+
 .error-message{
   color: red;
-  font-size: 25px;
+  font-size: 16px;
   padding: 10px;
 }
 .success-message{
   color: green;
-  font-size: 30px;
+  font-size: 16;
   padding: 10px;
-} 
-*/
+}

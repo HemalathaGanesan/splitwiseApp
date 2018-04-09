@@ -4,7 +4,7 @@ import logo from './images/logo.png';
 class Header extends React.Component {
     render(){
         return (
-            <div className = 'header'><img className="logo" alt="" src={logo} /></div>
+            <div className = 'header'><img className="logo-img" alt="" src={logo} /></div>
         )
     }
 }

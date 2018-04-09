@@ -47,12 +47,18 @@ class Homepage extends React.Component {
       }
     render() {
         return (
-            <div className = 'container1'>
-                <div id="login-box">
+            <div className = 'box'>
+                <div className="login-box">
                     <h1>LogIn Page</h1>
-                    <p className = 'label'>Enter your email : <input type='email' id='email'/></p>
-                    <p className = 'label'>Enter your Password : <input type = 'password' id='pwd'/></p>
-                    <Button color ='twitter' fluid ={true} size = 'huge' onClick={this.isValidate.bind(this)}>LogIn</Button>
+                    <div className="form-group">
+                        <label><span className="glyphicon glyphicon-user"></span>Email-Id :</label>
+                        <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                    </div>
+                    <div className="form-group">
+                        <label> Password</label>
+                        <input type="password" className="form-control" id="pwd" placeholder="Enter password" />
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}><span className="glyphicon glyphicon-off"></span> Login</button>
                     {this.renderRedirect()}
                     <div className = 'error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>

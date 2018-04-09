@@ -38,13 +38,22 @@ class Signup extends React.Component{
     }
     render(){
         return (
-            <div className = 'container1'>
-                <div id="signup-box">
-                    <h1>Create an account</h1>
-                    <p className = 'label'>Enter your name : <input type='email' id='name' /></p>
-                    <p className = 'label'>Enter your email : <input type='email' id='email' /></p>
-                    <p className = 'label'>Enter your Password : <input type = 'password' id='password'/></p>
-                    <Button color ='twitter' fluid ={true} size = 'huge'  onClick={this.createUser.bind(this)} >Sign Up</Button>
+            <div className = 'box'>
+                <div className="login-box">
+                    <h1>User Registration Page</h1>
+                    <div className="form-group">
+                        <label>Full Name :</label>
+                        <input type="terxt" className="form-control" id="name" placeholder="Enter full name" />
+                    </div>
+                    <div className="form-group">
+                        <label><span className="glyphicon glyphicon-user"></span>Email-Id :</label>
+                        <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                    </div>
+                    <div className="form-group">
+                        <label> Password</label>
+                        <input type="password" className="form-control" id="password" placeholder="Enter password" />
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.createUser.bind(this)}>SignUp</button>
                     <div className = 'success-message'>{this.state.successMessage}</div>
                     <p className='query'>Already registered ? <Link to="/">login</Link></p>
                 </div>
