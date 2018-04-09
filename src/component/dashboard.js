@@ -1,5 +1,6 @@
 import React from "react";
-// import Innerdashboard from "./innerdashboard";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class Dashboard extends React.Component {
   render() {
@@ -18,40 +19,38 @@ class Dashboard extends React.Component {
           <div className="sidebar-wrapper">
             <ul className="nav">
               <li className="active">
-                <a href="/dashboard">
+                <Link to="/dashboard">
                   <i className="material-icons">dashboard</i>
                   <p>Dashboard</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/profile">
+                <Link to="/profile">
                   <i className="material-icons">person</i>
                   <p>User Profile</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/expenses">
+                <Link to="/expenses">
                   <i className="material-icons">content_paste</i>
                   <p>All Expenses</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/group">
                   <i className="material-icons">library_books</i>
                   <p>Groups </p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/friend">
                   <i className="material-icons">group</i>
                   <p>Friends</p>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
-
-        {/* <Innerdashboard /> */}
       </div>
     );
   }

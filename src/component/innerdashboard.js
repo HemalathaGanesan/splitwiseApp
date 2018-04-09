@@ -1,9 +1,49 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 class Innerdashboard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dash_amount: []
+    };
+  }
+  componentWillMount() {
+    console.log("component will mount");
+    fetch("http://localhost:4000/api/dash")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        let val = data.map(amount => {
+          return (
+            <table className="table table-hover">
+              <thead className="text-warning">
+                <th>Totalbalance</th>
+                <th>you owe</th>
+                <th>you are owed</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${amount.totalbalance}</td>
+                  <td>${amount.you_owe}</td>
+                  <td>${amount.you_are_owed}</td>
+                </tr>
+              </tbody>
+            </table>
+          );
+        });
+
+        this.setState({ dash_amount: val });
+        console.log(this.state.dash_amount);
+      });
+  }
+
   render() {
     return (
-      <div class="wrapper">
-       <div
+      <div className="wrapper">
+        <div
           className="sidebar"
           data-color="purple"
           data-image="../img/sidebar-1.jpg"
@@ -16,163 +56,109 @@ class Innerdashboard extends React.Component {
           <div className="sidebar-wrapper">
             <ul className="nav">
               <li className="active">
-                <a href="/dashboard">
+                <Link to="/dashboard">
                   <i className="material-icons">dashboard</i>
                   <p>Dashboard</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/profile">
+                <Link to="/profile">
                   <i className="material-icons">person</i>
                   <p>User Profile</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/expenses">
+                <Link to="/expenses">
                   <i className="material-icons">content_paste</i>
                   <p>All Expenses</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/group">
                   <i className="material-icons">library_books</i>
                   <p>Groups</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/friend">
                   <i className="material-icons">group</i>
                   <p>Friends</p>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div class="main-panel">
-          <nav class="navbar navbar-transparent navbar-absolute">
-            <div class="container-fluid">
-              <div class="navbar-header">
+        <div className="main-panel">
+          <nav className="navbar navbar-transparent navbar-absolute">
+            <div className="container-fluid">
+              <div className="navbar-header">
                 <button
                   type="button"
-                  class="navbar-toggle"
+                  className="navbar-toggle"
                   data-toggle="collapse"
                 >
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar" />
-                  <span class="icon-bar" />
-                  <span class="icon-bar" />
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
                 </button>
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="#">
                   {" "}
                   Dashboard{" "}
                 </a>
               </div>
-              <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="material-icons">notifications</i>
-                      {/* <span class="notification"></span> */}
-                      <p class="hidden-lg hidden-md">Notifications</p>
+              <div className="collapse navbar-collapse">
+                <ul className="nav navbar-nav navbar-right">
+                  <li className="dropdown">
+                    <a
+                      href="#"
+                      className="dropdown-toggle"
+                      data-toggle="dropdown"
+                    >
+                      <i className="material-icons">notifications</i>
+                      {/* <span className="notification"></span> */}
+                      <p className="hidden-lg hidden-md">Notifications</p>
                     </a>
-                    {/* <ul class="dropdown-menu">
-                      <li>
-                        <a href="#">Mike John responded to your email</a>
-                      </li>
-                      <li>
-                        <a href="#">You have 5 new tasks</a>
-                      </li>
-                      <li>
-                        <a href="#">You're now friend with Andrew</a>
-                      </li>
-                      <li>
-                        <a href="#">Another Notification</a>
-                      </li>
-                      <li>
-                        <a href="#">Another One</a>
-                      </li>
-                    </ul> */}
                   </li>
                   <li>
                     <a
                       href="#pablo"
-                      class="dropdown-toggle"
+                      className="dropdown-toggle"
                       data-toggle="dropdown"
                     >
-                      <i class="material-icons">person</i>
-                      <p class="hidden-lg hidden-md">Profile</p>
+                      <i className="material-icons">person</i>
+                      <p className="hidden-lg hidden-md">Profile</p>
                     </a>
                   </li>
                 </ul>
-                {/* <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group  is-empty">
-                                    <input type="text" class="form-control" placeholder="Search"/>
-                                    <span class="material-input"></span>
-                                </div>
-                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                    <div class="ripple-container"></div>
-                                </button>
-                            </form> */}
               </div>
             </div>
           </nav>
-          <div class="content">
-          <div class="row1">
-          <a href="#" class="btn btn-primary btn-round">Add bill</a>
-          <a href="#" class="btn btn-primary btn-round">Settle</a>
-
-          </div>
-            <div class="row">
-              <div class="col-lg-6 col-md-12">
-                <div class="card">
-                  <div class="card-header" data-background-color="purple">
-                    <h4 class="title">User Expenses</h4>
-                    {/* <p class="category">New employees on 15th September, 2016</p> */}
+          <div className="content">
+            {/* <div className="row1">
+              <a href="#" className="btn btn-primary btn-round">
+                Add bill
+              </a>
+              <a href="#" className="btn btn-primary btn-round">
+                Settle
+              </a>
+            </div> */}
+            <div className="row">
+              <div className="col-lg-6 col-md-12">
+                <div className="card">
+                  <div className="card-header" data-background-color="purple">
+                    <h4 className="title">User Expenses</h4>
+                    {/* <p className="category">New employees on 15th September, 2016</p> */}
                   </div>
-                  <div class="card-content table-responsive">
-                    <table class="table table-hover">
-                      <thead class="text-warning">
-                        <th>Totalbalance</th>
-                        <th>you owe</th>
-                        <th>you are owed</th>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>$36,738</td>
-                          <td>$36,738</td>
-                          <td>$0.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div className="card-content table-responsive">
+                    {this.state.dash_amount}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <footer class="footer">
-          <div class="container-fluid">
-            <nav class="pull-left">
-              <ul>
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">Company</a>
-                </li>
-                <li>
-                  <a href="#">Portfolio</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </footer> */}
       </div>
-      // </div>
     );
   }
 }

@@ -4,6 +4,8 @@ import Dashboard from "./component/dashboard";
 import Innerdashboard from "./component/innerdashboard";
 import Profile from "./component/userprofile";
 import Expenses from './component/allexpenses'
+import Group from './component/group'
+import Friend from './component/friend'
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 class App extends React.Component {
@@ -15,6 +17,8 @@ class App extends React.Component {
           <Route path="/dashboard" exact strict component={Innerdashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/expenses" component={Expenses} />
+          <Route path="/group" component={Group} />
+          <Route path="/friend" component={Friend} />
         </div>
       </Router>
     );

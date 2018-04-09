@@ -1,40 +1,50 @@
 import React from "react";
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-class Expenses extends React.Component {
+class Friend extends React.Component {
   constructor() {
     super();
     this.state = {
-      expenses: []
+      friends: [],
+      popUpBill: "hide_popup"
     };
+    this.show = this.show.bind(this);
+    this.hide = this.hide.bind(this);
+  }
+  show() {
+    this.setState({ popUpBill: "show_popup" });
+  }
+  hide() {
+    this.setState({ popUpBill: "hide_popup" });
   }
   componentWillMount() {
-    fetch("http://localhost:4000/api/expenses")
+    fetch("http://localhost:4000/api/friend")
       .then(response => {
         return response.json();
       })
-      .then(expense => {
-        console.log(expense);
-        let expense_detail = expense.map(expz => {
+      .then(friend => {
+        console.log(friend);
+        let friend_detail = friend.map(expz => {
           return (
             <tbody>
               <tr>
                 <td>{expz.date}</td>
+                <td><a href="#">{expz.friend_name}</a></td>
                 <td>
-                  <a href="#">{expz.description}</a>
+                  {expz.description}
                 </td>
-                <td>{expz.person_name}</td>
-                <td>${expz.you_paid}</td>
-                <td>${expz.you_lent}</td>
+                <td>${expz.owes_you}</td>
               </tr>
             </tbody>
           );
         });
-        this.setState({ expenses: expense_detail });
-        console.log(this.state.expenses);
+        this.setState({
+          friends: friend_detail
+        });
+        console.log(this.state.friends);
       });
   }
-
   render() {
     return (
       <div className="wrapper">
@@ -88,30 +98,56 @@ class Expenses extends React.Component {
             <div class="container-fluid">
               <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                  All Expenses
+                  Friends
                 </a>
               </div>
             </div>
           </nav>
           <div class="content">
+            <div className="row1">
+              <button onClick={this.show}>Add a bill</button>
+              <div className={this.state.popUpBill}>
+                <div id="popupContact">
+                  <div className="text-field">
+                    <i className="fa fa-close" onClick={this.hide} />
+                    <h2>Add a bill</h2>
+                    <hr />
+                    <p>
+                      With you and:<input
+                        id="name"
+                        placeholder="Enter name or Email address"
+                        type="text"
+                      />
+                    </p>
+                    <button onClick={this.hide}>Close</button>
+                    <button type="button" className="savebtn">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" className="savebtn">
+                Settle
+              </button>
+            </div>
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-12">
                   <div class="card card-plain">
                     <div class="card-header" data-background-color="purple">
-                      <h4 class="title">All expenses details</h4>
+                      <h4 class="title">Friends details</h4>
                       <p class="category">April 2018</p>
                     </div>
                     <div class="card-content table-responsive">
                       <table class="table table-hover">
                         <thead>
                           <th>Date</th>
+                          <th>Friend Name</th>
                           <th>Description</th>
-                          <th>PersonName</th>
-                          <th>You paid</th>
-                          <th>You lent</th>
+                          <th>owes you</th>
                         </thead>
-                        {this.state.expenses}
+                        {this.state.friends}
                       </table>
                     </div>
                   </div>
@@ -124,4 +160,4 @@ class Expenses extends React.Component {
     );
   }
 }
-export default Expenses;
+export default Friend;
