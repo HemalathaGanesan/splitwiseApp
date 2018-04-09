@@ -8,7 +8,8 @@ class Homepage extends React.Component {
     constructor(){
         super();
         this.state={
-            errorMessage : ''
+            errorMessage : '',
+            redirect : false
         }
     }
    
@@ -28,7 +29,10 @@ class Homepage extends React.Component {
         }).then((response) => response.json())
         .then((response) => {
             if(response.status === 'successful'){
-                window.location.href='/dashboard'
+                //window.location.href='/dashboard'
+                this.setState({
+                    redirect : true
+                });
             }else{
                 this.setState({
                     errorMessage : 'Invalid email/password....!!!'
@@ -36,6 +40,11 @@ class Homepage extends React.Component {
             }
         })
     }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/dashboard' />
+        }
+      }
     render() {
         return (
             <div className = 'container'>
@@ -44,6 +53,7 @@ class Homepage extends React.Component {
                     <p className = 'label'>Enter your email : <input type='email' id='email'/></p>
                     <p className = 'label'>Enter your Password : <input type = 'password' id='pwd'/></p>
                     <Button color ='twitter' fluid ={true} size = 'huge' onClick={this.isValidate.bind(this)}>LogIn</Button>
+                    {this.renderRedirect()}
                     <div className = 'error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>
                 </div>
