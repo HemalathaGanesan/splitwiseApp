@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../Models/user');
 
+//req{username,email,password}. return succeful or unsuccessful.
 router.post('/signup', function (req, res) {
   User.findOne({ email: req.body.email }).then((data)=>{
     if(data===null){
@@ -22,6 +23,7 @@ router.post('/signup', function (req, res) {
   });
 })
 
+//req{email,password}, return success message with userdata
 router.post('/login', function (req, res) {
   let email = req.body.email;
   let password = req.body.password;
@@ -40,6 +42,17 @@ router.post('/login', function (req, res) {
     res.send({
       status: err
     })
+  })
+})
+
+//req{email} return user detail
+router.get('/user',function(){
+  User.findOne({ email: friend_email }).then((data) => {
+    if (data !== null) {
+      res.send(data);
+    } else {
+      res.send("User not found");
+    }
   })
 })
 
