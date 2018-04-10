@@ -1,4 +1,5 @@
 import React from "react";
+import Dashboard from "./dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Innerdashboard extends React.Component {
@@ -10,7 +11,7 @@ class Innerdashboard extends React.Component {
   }
   componentWillMount() {
     console.log("component will mount");
-    fetch("http://localhost:4000/api/dash")
+    fetch("http://localhost:8080/api/dash")
       .then(function(response) {
         return response.json();
       })
@@ -42,52 +43,8 @@ class Innerdashboard extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div
-          className="sidebar"
-          data-color="purple"
-          data-image="../img/sidebar-1.jpg"
-        >
-          <div className="logo">
-            <a href="#" className="simple-text">
-              SplitXpenz
-            </a>
-          </div>
-          <div className="sidebar-wrapper">
-            <ul className="nav">
-              <li className="active">
-                <Link to="/dashboard">
-                  <i className="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile">
-                  <i className="material-icons">person</i>
-                  <p>User Profile</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/expenses">
-                  <i className="material-icons">content_paste</i>
-                  <p>All Expenses</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/group">
-                  <i className="material-icons">library_books</i>
-                  <p>Groups</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/friend">
-                  <i className="material-icons">group</i>
-                  <p>Friends</p>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div className="wrapper">       
+        <Dashboard />
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -103,8 +60,7 @@ class Innerdashboard extends React.Component {
                   <span className="icon-bar" />
                 </button>
                 <a className="navbar-brand" href="#">
-                  {" "}
-                  Dashboard{" "}
+                  Dashboard
                 </a>
               </div>
               <div className="collapse navbar-collapse">
@@ -144,7 +100,7 @@ class Innerdashboard extends React.Component {
               </a>
             </div> */}
             <div className="row">
-              <div className="col-lg-6 col-md-12">
+              <div className="col-lg-6 ">
                 <div className="card">
                   <div className="card-header" data-background-color="purple">
                     <h4 className="title">User Expenses</h4>
