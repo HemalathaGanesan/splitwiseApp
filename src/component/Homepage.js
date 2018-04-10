@@ -1,53 +1,54 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css';
-import { Button } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import Dashboard from '../component/dashboard';
 
 class Homepage extends React.Component {
-    constructor(){
-        super();
-        this.state={
-            errorMessage : '',
-            redirect : false
+    constructor(props) {
+        super(props);
+        this.state = {
+            errorMessage: '',
+            redirect: false,
         }
     }
-   
+
     isValidate() {
+        let scope = this;
         const email = document.getElementById('email').value;
         const password = document.getElementById('pwd').value;
         let data = {
-            email : email,
-            password : password
+            email: email,
+            password: password
         }
         fetch('http://localhost:8080/api/login', {
             method: 'POST',
             body: JSON.stringify(data), // data can be `string` or {object}!
             headers: new Headers({
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             })
         }).then((response) => response.json())
-        .then((response) => {
-            if(response.status === 'successful'){
-                //window.location.href='/dashboard'
-                this.setState({
-                    redirect : true
-                });
-            }else{
-                this.setState({
-                    errorMessage : 'Invalid email/password....!!!'
-                })
-            }
-        })
+            .then((response) => {
+                if (response.status === 'successful') {
+                    scope.props.userD(response.user_data)
+                    //window.location.href='/dashboard'
+                    this.setState({
+                        redirect: true
+                    });
+
+                } else {
+                    this.setState({
+                        errorMessage: 'Invalid email/password....!!!'
+                    })
+                }
+            })
     }
-    renderRedirect = () =>{
+    renderRedirect = () => {
         if (this.state.redirect) {
-          return <Redirect to='/dashboard' />
+            return <Redirect to='/dashboard' />
         }
-      }
+    }
     render() {
         return (
-            <div className = 'box'>
+            <div className='box'>
                 <div className="login-box">
                     <h1>LogIn Page</h1>
                     <div className="form-group">
@@ -60,7 +61,7 @@ class Homepage extends React.Component {
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}><span className="glyphicon glyphicon-off"></span> Login</button>
                     {this.renderRedirect()}
-                    <div className = 'error-message'>{this.state.errorMessage}</div>
+                    <div className='error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>
                 </div>
             </div>

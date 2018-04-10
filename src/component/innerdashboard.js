@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Innerdashboard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       dash_amount: []
     };
@@ -38,6 +38,9 @@ class Innerdashboard extends React.Component {
         this.setState({ dash_amount: val });
         console.log(this.state.dash_amount);
       });
+  }
+  componentDidMount(){
+    console.log(this.props.user)
   }
 
   render() {

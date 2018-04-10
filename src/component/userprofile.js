@@ -107,23 +107,22 @@ class Profile extends React.Component {
                         <div className="row">
                           <div className="col-md-6">
                             <div className="form-group label-floating">
-                              <label className="control-label">Username</label>
-                              <input type="text" className="form-control" />
+                              <label className="control-label">UserName</label>
+                              <input type="text" value={this.props.user.username} className="form-control" />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group label-floating">
                               <label className="control-label">Email address</label>
-                              <input type="email" className="form-control" />
+                              <input type="email" value={this.props.user.email} className="form-control" />
                             </div>
                           </div>
                         </div>
-
                         <div className="row">
-                        <div className="col-md-4">
+                          <div className="col-md-4">
                             <div className="form-group label-floating">
                               <label className="control-label">Change your Password</label>
-                              <input type="text" className="form-control" />
+                              <input type="text" value={this.props.user.password} className="form-control" />
                             </div>
                           </div>
                           <div className="col-md-4">
@@ -132,27 +131,8 @@ class Profile extends React.Component {
                               <input type="text" className="form-control" />
                             </div>
                           </div>
-                          <div className="col-md-4">
-                            <div className="form-group label-floating">
-                              <label className="control-label">City</label>
-                              <input type="text" className="form-control" />
-                            </div>
-                          </div>
+
                         </div>
-                        {/* <div className="row">
-                          <div className="col-md-12">
-                            <div className="form-group">
-                              <label>About Me</label>
-                              <div className="form-group label-floating">
-                                <label className="control-label">
-                                  {" "}
-                                  You are a very sweet person.
-                                </label>
-                                <textarea className="form-control" rows="5" />
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
                         <button
                           type="submit"
                           className="btn btn-primary pull-right"
@@ -164,24 +144,6 @@ class Profile extends React.Component {
                     </div>
                   </div>
                 </div>
-                {/* <div className="col-md-4">
-                  <div className="card card-profile">
-                    <div className="card-avatar">
-                      <a href="#">
-                        <img className="img" src="./img/faces/baby.jpg" />
-                      </a>
-                    </div>
-                    <div className="content">
-                      <p className="card-content">
-                        Don't be scared of the truth because we need to restart
-                        the human foundation in truth.
-                      </p>
-                      <a href="#" className="btn btn-primary btn-round">
-                        Change Photo
-                      </a>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
