@@ -7,7 +7,8 @@ class Signup extends React.Component{
     constructor(){
         super();
         this.state={
-            successMessage : ''   
+            successMessage : '',
+            errorMessage : '' 
         }
     }
     createUser() {
@@ -36,6 +37,7 @@ class Signup extends React.Component{
                 })
             }
         })
+       
     }
     render(){
         return (

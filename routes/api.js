@@ -9,9 +9,9 @@ router.post('/signup', function (req, res) {
     email: req.body.email,
     password: req.body.password
   }).then(() => {
-    res.send({
+      res.send({
       status: 'successful',
-      groupName: req.body.username
+      Name: req.body.username
     })
   })
 })
