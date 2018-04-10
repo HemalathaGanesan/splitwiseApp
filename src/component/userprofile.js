@@ -1,56 +1,12 @@
 import React from "react";
+import Dashboard from "./dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 
 class Profile extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <div
-          className="sidebar"
-          data-color="purple"
-          data-image="../img/sidebar-1.jpg"
-        >
-          <div className="logo">
-            <a href="#" className="simple-text">
-              SplitXpenz
-            </a>
-          </div>
-          <div className="sidebar-wrapper">
-            <ul className="nav">
-              <li className="active">
-                <Link to="/dashboard">
-                  <i className="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile">
-                  <i className="material-icons">person</i>
-                  <p>User Profile</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/expenses">
-                  <i className="material-icons">content_paste</i>
-                  <p>All Expenses</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/group">
-                  <i className="material-icons">library_books</i>
-                  <p>Groups</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/friend">
-                  <i className="material-icons">group</i>
-                  <p>Friends</p>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <Dashboard />
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -66,16 +22,19 @@ class Profile extends React.Component {
                   <span className="icon-bar" />
                 </button>
                 <a className="navbar-brand" href="#">
-                  {" "}
-                  Profile{" "}
+                  Profile
                 </a>
               </div>
               <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
                   <li className="dropdown">
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                    <a
+                      href="#"
+                      className="dropdown-toggle"
+                      data-toggle="dropdown"
+                    >
                       <i className="material-icons">notifications</i>
-                      {/* <span className="notification"></span> */}
+
                       <p className="hidden-lg hidden-md">Notifications</p>
                     </a>
                   </li>
@@ -113,22 +72,27 @@ class Profile extends React.Component {
                           </div>
                           <div className="col-md-6">
                             <div className="form-group label-floating">
-                              <label className="control-label">Email address</label>
+                              <label className="control-label">
+                                Email address
+                              </label>
                               <input type="email" className="form-control" />
                             </div>
                           </div>
                         </div>
-
                         <div className="row">
-                        <div className="col-md-4">
+                          <div className="col-md-4">
                             <div className="form-group label-floating">
-                              <label className="control-label">Change your Password</label>
+                              <label className="control-label">
+                                Change your Password
+                              </label>
                               <input type="text" className="form-control" />
                             </div>
                           </div>
                           <div className="col-md-4">
                             <div className="form-group label-floating">
-                              <label className="control-label">Phone Number</label>
+                              <label className="control-label">
+                                Phone Number
+                              </label>
                               <input type="text" className="form-control" />
                             </div>
                           </div>
@@ -139,20 +103,7 @@ class Profile extends React.Component {
                             </div>
                           </div>
                         </div>
-                        {/* <div className="row">
-                          <div className="col-md-12">
-                            <div className="form-group">
-                              <label>About Me</label>
-                              <div className="form-group label-floating">
-                                <label className="control-label">
-                                  {" "}
-                                  You are a very sweet person.
-                                </label>
-                                <textarea className="form-control" rows="5" />
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
+
                         <button
                           type="submit"
                           className="btn btn-primary pull-right"
@@ -164,24 +115,6 @@ class Profile extends React.Component {
                     </div>
                   </div>
                 </div>
-                {/* <div className="col-md-4">
-                  <div className="card card-profile">
-                    <div className="card-avatar">
-                      <a href="#">
-                        <img className="img" src="./img/faces/baby.jpg" />
-                      </a>
-                    </div>
-                    <div className="content">
-                      <p className="card-content">
-                        Don't be scared of the truth because we need to restart
-                        the human foundation in truth.
-                      </p>
-                      <a href="#" className="btn btn-primary btn-round">
-                        Change Photo
-                      </a>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
