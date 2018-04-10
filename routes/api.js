@@ -2,20 +2,28 @@ const express = require('express');
 const router = express.Router();
 const User = require('../Models/user');
 
+//req{username,email,password}. return succeful or unsuccessful.
 router.post('/signup', function (req, res) {
-  let password = req.body.password;
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  }).then(() => {
-    res.send({
-      status: 'successful',
-      groupName: req.body.username
-    })
-  })
+  User.findOne({ email: req.body.email }).then((data)=>{
+    if(data===null){
+      User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      }).then(() => {
+        res.send({
+          status: 'successful'
+        })
+      })
+    }else{
+      res.send({
+        status: 'Unsuccessful'
+      })
+    }
+  });
 })
 
+//req{email,password}, return success message with userdata
 router.post('/login', function (req, res) {
   let email = req.body.email;
   let password = req.body.password;
@@ -23,7 +31,7 @@ router.post('/login', function (req, res) {
     if (email === data.email && password === data.password) {
       res.send({
         status: 'successful',
-        email: email
+        user_data:data
       })
     } else {
       res.send({
@@ -34,6 +42,17 @@ router.post('/login', function (req, res) {
     res.send({
       status: err
     })
+  })
+})
+
+//req{email} return user detail
+router.get('/user',function(){
+  User.findOne({ email: friend_email }).then((data) => {
+    if (data !== null) {
+      res.send(data);
+    } else {
+      res.send("User not found");
+    }
   })
 })
 
