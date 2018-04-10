@@ -16,7 +16,7 @@ class Signup extends React.Component{
         const password = document.getElementById('password').value;
         
         let user = {
-            name : name,
+            username : name,
             email : email,
             password : password
         }
@@ -29,6 +29,7 @@ class Signup extends React.Component{
             })
         }).then((response) => response.json())
         .then((response) => {
+            console.log("inside response",response)
             if(response.status === 'successful'){
                 this.setState({
                     successMessage : 'Your account has been created successfully....',
