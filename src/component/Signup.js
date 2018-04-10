@@ -34,6 +34,13 @@ class Signup extends React.Component{
             if(response.status === 'successful'){
                 this.setState({
                     successMessage : 'Your account has been created successfully....',
+                    errorMessage : ''
+                })
+            }else{
+                this.setState({
+                    errorMessage : 'User already registered !!',
+                    successMessage:''
+        
                 })
             }
         })
@@ -58,6 +65,7 @@ class Signup extends React.Component{
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.createUser.bind(this)}>SignUp</button>
                     <div className = 'success-message'>{this.state.successMessage}</div>
+                    <div className = 'error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Already registered ? <Link to="/">login</Link></p>
                 </div>
             </div>

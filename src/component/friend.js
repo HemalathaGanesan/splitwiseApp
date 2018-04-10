@@ -19,7 +19,7 @@ class Friend extends React.Component {
     this.setState({ popUpBill: "hide_popup" });
   }
   componentWillMount() {
-    fetch("http://localhost:4000/api/friend")
+    fetch("http://localhost:8080/api/friend")
       .then(response => {
         return response.json();
       })

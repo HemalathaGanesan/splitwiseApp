@@ -3,17 +3,23 @@ const router = express.Router();
 const User = require('../Models/user');
 
 router.post('/signup', function (req, res) {
-  let password = req.body.password;
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  }).then(() => {
+  User.findOne({ email: req.body.email }).then((data)=>{
+    if(data===null){
+      User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      }).then(() => {
+        res.send({
+          status: 'successful'
+        })
+      })
+    }else{
       res.send({
-      status: 'successful',
-      Name: req.body.username
-    })
-  })
+        status: 'Unsuccessful'
+      })
+    }
+  });
 })
 
 router.post('/login', function (req, res) {
@@ -23,7 +29,7 @@ router.post('/login', function (req, res) {
     if (email === data.email && password === data.password) {
       res.send({
         status: 'successful',
-        email: email
+        user_data:data
       })
     } else {
       res.send({
