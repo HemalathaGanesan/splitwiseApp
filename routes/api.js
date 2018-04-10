@@ -46,8 +46,9 @@ router.post('/login', function (req, res) {
 })
 
 //req{email} return user detail
-router.get('/user',function(){
-  User.findOne({ email: friend_email }).then((data) => {
+router.get('/user/:email',function(req,res){
+  console.log(req.params.email);
+  User.findOne({ email:req.params.email }).then((data) => {
     if (data !== null) {
       res.send(data);
     } else {
