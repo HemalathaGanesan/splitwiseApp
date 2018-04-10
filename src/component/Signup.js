@@ -50,15 +50,12 @@ class Signup extends React.Component{
                 <div className="login-box">
                     <h1>User Registration Page</h1>
                     <div className="form-group">
-                        <label>Full Name :</label>
                         <input type="terxt" className="form-control" id="name" placeholder="Enter full name" />
                     </div>
                     <div className="form-group">
-                        <label><span className="glyphicon glyphicon-user"></span>Email-Id :</label>
                         <input type="email" className="form-control" id="email" placeholder="Enter email" />
                     </div>
                     <div className="form-group">
-                        <label> Password</label>
                         <input type="password" className="form-control" id="password" placeholder="Enter password" />
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.createUser.bind(this)}>SignUp</button>

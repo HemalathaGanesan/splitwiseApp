@@ -114,6 +114,17 @@ async function addFriendToFriendList(friend, user_email, friend_email) {
   return msg;
 }
 
+//req{email} return friend list
+router.get('/friends/:email',function(req,res){
+  User.findOne({ email:req.params.email }).then((data) => {
+    if (data !== null) {
+      res.send(data.friends);
+    } else {
+      res.send("User not found");
+    }
+  })
+})
+
 // req{user_email,friend_email, description, amountPaid} divide the amount in 2.
 // udate the paid and borrowed feild of db.
 router.post('/addBillWithFriend', function (req, res) {
@@ -174,5 +185,39 @@ router.post('/addBillWithFriend', function (req, res) {
   })
 })
 
+//
+router.get('/sharedBillWithFriend/:email/:frndMail',function(req,res){
+  User.findOne({email:req.params.email}).then((data)=>{
+    var lend = 0;
+    var borrowed = 0;
+    data.paid.forEach(function(element){
+      if(element.friend_email === req.params.frndMail){
+        lend = lend + element.lend;
+      }
+    })
+    data.borrowed.forEach(function(element){
+      if(element.friend_email === req.params.frndMail){
+        borrowed = borrowed+element.lend;
+      }
+    })
+    var bill = {
+      total:lend-borrowed,
+      paid:lend,
+      borrowed:borrowed
+    }
+    res.send(bill);
+  })
+})
+
+//req{email} return all expense for that user
+
+router.get('/allExpenses/:email',function(req,res){
+  User.findOne({email:req.params.email}).then((data)=>{
+    if(data != null){
+      var expense_list = [...data.paid,...data.borrowed];
+      res.send(expense_list);
+    }
+  })
+})
 
 module.exports = router

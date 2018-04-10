@@ -28,7 +28,7 @@ class Homepage extends React.Component {
         }).then((response) => response.json())
             .then((response) => {
                 if (response.status === 'successful') {
-                    scope.props.userD(response.user_data)
+                    scope.props.userData(response.user_data)
                     //window.location.href='/dashboard'
                     this.setState({
                         redirect: true
@@ -52,14 +52,12 @@ class Homepage extends React.Component {
                 <div className="login-box">
                     <h1>LogIn Page</h1>
                     <div className="form-group">
-                        <label><span className="glyphicon glyphicon-user"></span>Email-Id :</label>
                         <input type="email" className="form-control" id="email" placeholder="Enter email" />
                     </div>
                     <div className="form-group">
-                        <label> Password</label>
                         <input type="password" className="form-control" id="pwd" placeholder="Enter password" />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}><span className="glyphicon glyphicon-off"></span> Login</button>
+                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}>Login</button>
                     {this.renderRedirect()}
                     <div className='error-message'>{this.state.errorMessage}</div>
                     <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>

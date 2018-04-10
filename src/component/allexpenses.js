@@ -1,4 +1,5 @@
 import React from "react";
+import Dashboard from "./dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Expenses extends React.Component {
@@ -9,7 +10,7 @@ class Expenses extends React.Component {
     };
   }
   componentWillMount() {
-    fetch("http://localhost:4000/api/expenses")
+    fetch("http://localhost:8080/api/expenses")
       .then(response => {
         return response.json();
       })
@@ -38,55 +39,21 @@ class Expenses extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <div
-          className="sidebar"
-          data-color="purple"
-          data-image="../img/sidebar-1.jpg"
-        >
-          <div className="logo">
-            <a href="#" className="simple-text">
-              SplitXpenz
-            </a>
-          </div>
-          <div className="sidebar-wrapper">
-            <ul className="nav">
-              <li className="active">
-                <Link to="/dashboard">
-                  <i className="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile">
-                  <i className="material-icons">person</i>
-                  <p>User Profile</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/expenses">
-                  <i className="material-icons">content_paste</i>
-                  <p>All Expenses</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/group">
-                  <i className="material-icons">library_books</i>
-                  <p>Groups</p>
-                </Link>
-              </li>
-              <li>
-                <Link to="/friend">
-                  <i className="material-icons">group</i>
-                  <p>Friends</p>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+       <Dashboard />
         <div class="main-panel">
           <nav class="navbar navbar-transparent navbar-absolute">
             <div class="container-fluid">
               <div class="navbar-header">
+                <button
+                  type="button"
+                  className="navbar-toggle"
+                  data-toggle="collapse"
+                >
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                </button>
                 <a class="navbar-brand" href="#">
                   All Expenses
                 </a>
