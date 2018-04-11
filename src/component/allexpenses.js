@@ -10,7 +10,7 @@ class Expenses extends React.Component {
     };
   }
   componentWillMount() {
-    fetch("http://localhost:8081/api/expenses")
+    fetch("http://localhost:8080/api/expenses")
       .then(response => {
         return response.json();
       })

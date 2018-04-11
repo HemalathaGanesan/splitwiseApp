@@ -11,7 +11,7 @@ class Innerdashboard extends React.Component {
   }
   componentWillMount() {
     console.log("component will mount");
-    fetch("http://localhost:8081/api/dash")
+    fetch("http://localhost:8080/api/dash")
       .then(function(response) {
         return response.json();
       })

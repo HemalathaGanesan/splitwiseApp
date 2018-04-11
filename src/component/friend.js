@@ -10,14 +10,12 @@ class Friend extends React.Component {
     this.state = {
       friends: []
     };
-  }
-
+  } 
   componentWillMount() {
       let email=this.props.user.email
       console.log(email)
-    fetch(`http://localhost:8081/api/friends/${email}`)
+    fetch(`http://localhost:8080/api/friends/${email}`)
       .then((response) => {
-        console.log(response.json())
         return response.json();
       })
       .then(friend => {
@@ -29,7 +27,7 @@ class Friend extends React.Component {
               <tr>
                 <td>{frind.date}</td>
                 <td>
-                  <a href="#">{frind.friend_name}</a>
+                  <Link to="#">{frind.friend_name}</Link>
                 </td>
                 <td>{frind.description}</td>
                 <td><i class="fa fa-inr"></i>{frind.owes_you}</td>

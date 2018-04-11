@@ -10,16 +10,15 @@ class Homepage extends React.Component {
             redirect: false,
         }
     }
-
     isValidate() {
         let scope = this;
         const email = document.getElementById('email').value;
-        const password = document.getElementById('pwd').value;
+        const password = document.getElementById('key').value;
         let data = {
             email: email,
             password: password
         }
-        fetch('http://localhost:8081/api/login', {
+        fetch('http://localhost:8080/api/login', {
             method: 'POST',
             body: JSON.stringify(data), // data can be `string` or {object}!
             headers: new Headers({
@@ -43,7 +42,15 @@ class Homepage extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/friend' />
+            return <Redirect to='/dashboard' />
+        }
+    }
+    myFunction() {
+        var x = document.getElementById("key");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
     }
     render() {
@@ -55,7 +62,10 @@ class Homepage extends React.Component {
                         <input type="email" className="form-control" id="email" placeholder="Enter email" />
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" id="pwd" placeholder="Enter password" />
+                        <input type="password" className="form-control" id="key" placeholder="Enter password" />
+                    </div>
+                    <div className="form-group">
+                        <input type="checkbox" onClick={this.myFunction.bind(this)}/>Show Password
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}>Login</button>
                     {this.renderRedirect()}
