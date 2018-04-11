@@ -59,25 +59,51 @@ router.get('/user',function(){
 router.put('/addFriend', function (req, res) {
   var friend_email = req.body.friend_email;
   var user_email = req.body.user_email;
-  User.findOne({ email: friend_email }).then((data) => {
+  User.findOne({ email: user_email }).then((data) => {
+    var user={};
     if (data !== null) {
       var friend_name = data.username;
-      var friend = {
+      user = {
         "friend_name": friend_name,
-        "friend_email": friend_email
+        "friend_email": user_email
       }
-      var msg = addFriendToFriendList(friend, user_email, friend_email);
-      console.log(msg, "msg");
-      res.send(msg);
     } else {
-      res.send("Your friend is not registered");
+      res.send("Something Went wrong");
     }
+    return user;
+  }).then((user)=>{
+    User.findOne({ email: friend_email }).then((data) => {
+      if (data !== null) {
+        var friend_name = data.username;
+        var friend = {
+          "friend_name": friend_name,
+          "friend_email": friend_email
+        }
+        addFriendToFriendList(friend,user, user_email, friend_email).then((msg)=>{
+          console.log(msg, "msg");
+          res.send({
+            status: 'successful',
+            msg:msg
+          })
+        })
+      } else {
+        res.send({
+          status: 'successful',
+          msg:"Your friend is not registered"
+        })
+      }
+    })
   })
 })
 // req{ user_email, friend_email}
 // save the friend_email in the user friends feild.
-async function addFriendToFriendList(friend, user_email, friend_email) {
+async function addFriendToFriendList(friend, user, user_email, friend_email) {
   var msg = '';
+  var friend_id;
+  await User.findOne({email:friend_email}).then(data=>{
+    friend_id = data._id
+  })
+  console.log(friend_id,'friends ID');
   await User.findOne({ email: user_email }).then((data) => {
     var user_id = data._id;
     var check;
@@ -105,6 +131,15 @@ async function addFriendToFriendList(friend, user_email, friend_email) {
           }
         }
       );
+      User.findByIdAndUpdate(friend_id,
+        { $push: { friends: user } },
+        { safe: true, upsert: true },
+        function (err, doc) {
+          if (err) {
+            console.log(err);
+          } else {
+          }
+        });
       msg = 'Successfully added friend to your list';
     } else {
       msg = "Already a friend";
@@ -199,6 +234,26 @@ router.get('/sharedBillWithFriend/:email/:frndMail',function(req,res){
       if(element.friend_email === req.params.frndMail){
         borrowed = borrowed+element.lend;
       }
+    })
+    var bill = {
+      total:lend-borrowed,
+      paid:lend,
+      borrowed:borrowed
+    }
+    res.send(bill);
+  })
+})
+
+//
+router.get('/sharedBill/:email',function(req,res){
+  User.findOne({email:req.params.email}).then((data)=>{
+    var lend = 0;
+    var borrowed = 0;
+    data.paid.forEach(function(element){
+      lend = lend + element.lend;
+    })
+    data.borrowed.forEach(function(element){
+      borrowed = borrowed+element.lend;
     })
     var bill = {
       total:lend-borrowed,
