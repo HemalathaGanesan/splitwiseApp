@@ -1,5 +1,4 @@
 import React from "react";
-// import Popup from "./popup"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Dashboard extends React.Component {
@@ -81,6 +80,7 @@ class Dashboard extends React.Component {
                         <h2>Add a Friend</h2>
                         <hr />
                         <p>
+                          
                           Friend Email:<input
                             id="friend_email"
                             placeholder="Email address"

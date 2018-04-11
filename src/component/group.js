@@ -1,5 +1,6 @@
 import React from "react";
 import Dashboard from "./dashboard";
+import AddBillPopup from "./AddBillpopup";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Group extends React.Component {
@@ -34,8 +35,14 @@ class Group extends React.Component {
                 <td>
                   <a href="#">{expz.description}</a>
                 </td>
-                <td>${expz.you_paid}</td>
-                <td>${expz.you_lent}</td>
+                <td>
+                  <i class="fa fa-inr" />
+                  {expz.you_paid}
+                </td>
+                <td>
+                  <i class="fa fa-inr" />
+                  {expz.you_lent}
+                </td>
               </tr>
             </tbody>
           );
@@ -48,10 +55,10 @@ class Group extends React.Component {
     return (
       <div className="wrapper">
         <Dashboard />
-        <div class="main-panel">
-          <nav class="navbar navbar-transparent navbar-absolute">
-            <div class="container-fluid">
-              <div class="navbar-header">
+        <div className="main-panel">
+          <nav className="navbar navbar-transparent navbar-absolute">
+            <div className="container-fluid">
+              <div className="navbar-header">
                 <button
                   type="button"
                   className="navbar-toggle"
@@ -62,50 +69,24 @@ class Group extends React.Component {
                   <span className="icon-bar" />
                   <span className="icon-bar" />
                 </button>
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="#">
                   Groups
                 </a>
               </div>
             </div>
           </nav>
-          <div class="content">
-            <div className="row1">
-              <button onClick={this.show}>Add a bill</button>
-              <div className={this.state.popUpBill}>
-                <div id="popupContact">
-                  <div className="text-field">
-                    <i className="fa fa-close" onClick={this.hide} />
-                    <h2>Add a bill</h2>
-                    <hr />
-                    <p>
-                      With you and:<input
-                        id="name"
-                        placeholder="Enter name or Email address"
-                        type="text"
-                      />
-                    </p>
-                    <button onClick={this.hide}>Close</button>
-                    <button type="button" className="savebtn">
-                      Save
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <button type="button" className="savebtn">
-                Settle
-              </button>
-            </div>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card card-plain">
-                    <div class="card-header" data-background-color="purple">
-                      <h4 class="title">Groups expenses details</h4>
-                      <p class="category">April 2018</p>
+          <div className="content">
+            <AddBillPopup />
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="card card-plain">
+                    <div className="card-header" data-background-color="purple">
+                      <h4 className="title">Groups expenses details</h4>
+                      <p className="category">April 2018</p>
                     </div>
-                    <div class="card-content table-responsive">
-                      <table class="table table-hover">
+                    <div className="card-content table-responsive">
+                      <table className="table table-hover">
                         <thead>
                           <th>Date</th>
                           <th>Group Name</th>

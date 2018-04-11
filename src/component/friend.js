@@ -1,6 +1,6 @@
 import React from "react";
 import Dashboard from "./dashboard";
-import Popup from "./popup";
+import AddBillPopup from "./AddBillpopup";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -65,7 +65,7 @@ class Friend extends React.Component {
             </div>
           </nav>
           <div className="content">
-            <Popup />
+            <AddBillPopup />
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
