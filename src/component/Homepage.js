@@ -45,12 +45,12 @@ class Homepage extends React.Component {
             return <Redirect to='/dashboard' />
         }
     }
-    myFunction() {
-        var x = document.getElementById("key");
-        if (x.type === "password") {
-            x.type = "text";
+    showPassword() {
+        var data = document.getElementById("key");
+        if (data.type === "password") {
+            data.type = "text";
         } else {
-            x.type = "password";
+            data.type = "password";
         }
     }
     render() {
@@ -65,7 +65,7 @@ class Homepage extends React.Component {
                         <input type="password" className="form-control" id="key" placeholder="Enter password" />
                     </div>
                     <div className="form-group">
-                        <input type="checkbox" onClick={this.myFunction.bind(this)}/>Show Password
+                        <input type="checkbox" onClick={this.showPassword.bind(this)}/>Show Password
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}>Login</button>
                     {this.renderRedirect()}

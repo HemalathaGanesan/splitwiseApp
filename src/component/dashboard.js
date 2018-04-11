@@ -1,33 +1,62 @@
 import React from "react";
-// import Popup from "./popup"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      popUpBill: "hide_popup"
+      popUpBill: "hide_popup",
+      successMessage : '',
+      errorMessage :''
     };
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
   }
-  /* componentDidMount(){
-    console.log(this.props.user.email)
-  }
-  addFriend(){
-    /* console.log('inside addFriend....',this.props.user.email);
-    let userEmail = this.props.user.email; 
+  addFriend () {
+    let userEmail = this.props.user.email;
     let friendEmail = document.getElementById('friend_email').value;
-    console.log(friendEmail);
-  } */
+    let addFriend = {
+      friend_email : friendEmail,
+      user_email : userEmail
+    }
+    console.log(JSON.stringify(addFriend))
+    fetch('http://localhost:8080/api/addFriend', {
+            method: 'PUT',
+            body: JSON.stringify(addFriend), // data can be `string` or {object}!
+            headers: new Headers({
+              'Content-Type': 'application/json'
+            })
+        }).then((response) => response.json())
+        .then((response) => {
+            console.log("inside response",response);
+            if(response.status === 'successful'){
+                this.setState({
+                    successMessage : 'Friend added successfully....',
+                    errorMessage : ''
+                })
+            }else{
+                this.setState({
+                    errorMessage : 'Your Friend is not registered !!',
+                    successMessage:''
+        
+                })
+            }
+        })
+        this.hide();
+    
+  }
   show() {
-    console.log("show");
     this.setState({ popUpBill: "show_popup" });
   }
   hide() {
     this.setState({ popUpBill: "hide_popup" });
   }
 
+  /* componentDidMount(){
+    console.log('dashboard mounted')
+    console.log(this.props.user)
+    this.setState({user: this.props.user})
+  } */
   render() {
     return (
       <div
@@ -88,7 +117,7 @@ class Dashboard extends React.Component {
                           />
                         </p>
                         <button onClick={this.hide}>Close</button>
-                        <button type="button" className="savebtn"/*  onClick={this.addFriend.bind(this)} */>
+                        <button type="button" className="savebtn" onClick={this.addFriend.bind(this)}>
                           Save
                         </button>
                       </div>

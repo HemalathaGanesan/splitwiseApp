@@ -24,12 +24,12 @@ class Friend extends React.Component {
           return (
             <tbody>
               <tr>
-                <td>{data.date}</td>
                 <td>
                   <a href="#">{data.friend_name}</a>
                 </td>
-                <td>{data.description}</td>
-                <td>${data.owes_you}</td>
+                <td>₹{data.total_balance}</td>
+                <td>₹{data.paid_balance}</td>
+                <td>₹{data.lend_balance}</td>
               </tr>
             </tbody>
           );
@@ -43,7 +43,7 @@ class Friend extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Dashboard />
+        <Dashboard user={this.props.user}/>
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -77,10 +77,10 @@ class Friend extends React.Component {
                     <div className="card-content table-responsive">
                       <table className="table table-hover">
                       <thead>
-                        <th>Date</th>
-                        <th>Friend Name</th>
-                        <th>Description</th>
-                        <th>owes you</th>
+                        <th>Friends Name</th>
+                        <th>Total Balance</th>
+                        <th>You paid</th>
+                        <th>You lend</th>
                         </thead>
                         {this.state.friends}
                       </table>

@@ -1,6 +1,5 @@
 import React from "react";
 import Dashboard from "./dashboard";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Innerdashboard extends React.Component {
   constructor(props) {
@@ -10,20 +9,18 @@ class Innerdashboard extends React.Component {
     };
   }
   componentWillMount() {
-    console.log("component will mount");
     fetch("http://localhost:8080/api/dash")
       .then(function(response) {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         let val = data.map(amount => {
           return (
             <table className="table table-hover">
               <thead className="text-warning">
-                <th>Totalbalance</th>
-                <th>you owe</th>
-                <th>you are owed</th>
+                <th>Total balance</th>
+                <th>You paid</th>
+                <th>You lend</th>
               </thead>
               <tbody>
                 <tr>
@@ -37,17 +34,12 @@ class Innerdashboard extends React.Component {
         });
 
         this.setState({ dash_amount: val });
-        console.log(this.state.dash_amount);
       });
   }
-  componentDidMount(){
-    console.log(this.props.user)
-  }
-
-  render() {
+ render() {
     return (
       <div className="wrapper">       
-        <Dashboard />
+        <Dashboard user={this.props.user}/>
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">

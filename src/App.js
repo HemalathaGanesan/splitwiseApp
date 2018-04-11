@@ -56,7 +56,6 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route path="/main" render={() => {return <Dashboard user={this.state.user}/>}} />
             <Route path="/dashboard" render={() => {return <Innerdashboard user={this.state.user}/>}} />
             <Route path="/profile" render={() => {return <Profile user={this.state.user}/>}} />
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
