@@ -3,15 +3,15 @@ import Dashboard from "./dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Innerdashboard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       dash_amount: []
     };
   }
   componentWillMount() {
     console.log("component will mount");
-    fetch("http://localhost:8080/api/dash")
+    fetch("http://localhost:8081/api/dash")
       .then(function(response) {
         return response.json();
       })
@@ -39,6 +39,9 @@ class Innerdashboard extends React.Component {
         this.setState({ dash_amount: val });
         console.log(this.state.dash_amount);
       });
+  }
+  componentDidMount(){
+    console.log(this.props.user)
   }
 
   render() {

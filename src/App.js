@@ -12,6 +12,21 @@ import Group from "./component/group";
 import Friend from "./component/friend";
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user: {}
+    }
+  }
+  getUser(user){
+    this.setState({
+      user: user
+    });
+    console.log('User ',user);
+  }
+  componentDidUpdate(){
+    console.log('user data ', this.state.user);
+  }
   render() {
     return (
       <div className="App">
@@ -24,7 +39,7 @@ class App extends React.Component {
                 return (
                   <div>
                     <Header />
-                    <Homepage />
+                    <Homepage userData={this.getUser.bind(this)}/>
                   </div>
                 );
               }}
@@ -41,12 +56,12 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route path="/main" component={Dashboard} />
-            <Route path="/dashboard" component={Innerdashboard} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/expenses" component={Expenses} />
-            <Route path="/group" component={Group} />
-            <Route path="/friend" component={Friend} />
+            <Route path="/main" render={() => {return <Dashboard user={this.state.user}/>}} />
+            <Route path="/dashboard" render={() => {return <Innerdashboard user={this.state.user}/>}} />
+            <Route path="/profile" render={() => {return <Profile user={this.state.user}/>}} />
+            <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
+            <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
+            <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
           </div>
         </Router>
       </div>

@@ -20,7 +20,7 @@ class Group extends React.Component {
     this.setState({ popUpBill: "hide_popup" });
   }
   componentWillMount() {
-    fetch("http://localhost:8080/api/group")
+    fetch("http://localhost:8081/api/group")
       .then(response => {
         return response.json();
       })

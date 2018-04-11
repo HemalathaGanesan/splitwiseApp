@@ -10,6 +10,15 @@ class Dashboard extends React.Component {
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
   }
+  //  componentDidMount(){
+  //   console.log("dashboard",this.props.user.email)
+  // }
+  /*addFriend(){
+   console.log('inside addFriend....',this.props.user.email);
+    let userEmail = this.props.user.email; 
+    let friendEmail = document.getElementById('friend_email').value;
+    console.log(friendEmail);
+  } */
   show() {
     console.log("show");
     this.setState({ popUpBill: "show_popup" });
@@ -18,7 +27,8 @@ class Dashboard extends React.Component {
     this.setState({ popUpBill: "hide_popup" });
   }
 
-  render() {
+  render() {    
+    // console.log("dashboard",this.props.user.friends[0].friend_email)
     return (
       <div
         className="sidebar"
@@ -73,13 +83,13 @@ class Dashboard extends React.Component {
                         <p>
                           
                           Friend Email:<input
-                            id="name"
+                            id="friend_email"
                             placeholder="Email address"
                             type="text"
                           />
                         </p>
                         <button onClick={this.hide}>Close</button>
-                        <button type="button" className="savebtn">
+                        <button type="button" className="savebtn"/*  onClick={this.addFriend.bind(this)} */>
                           Save
                         </button>
                       </div>

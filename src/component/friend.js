@@ -13,22 +13,26 @@ class Friend extends React.Component {
   }
 
   componentWillMount() {
-    fetch("http://localhost:8080/api/friend")
-      .then(response => {
+      let email=this.props.user.email
+      console.log(email)
+    fetch(`http://localhost:8081/api/friends/${email}`)
+      .then((response) => {
+        console.log(response.json())
         return response.json();
       })
       .then(friend => {
         console.log(friend);
-        let friend_detail = friend.map(expz => {
+        let friend_detail = friend.map(frind => {
+          console.log(frind)
           return (
             <tbody>
               <tr>
-                <td>{expz.date}</td>
+                <td>{frind.date}</td>
                 <td>
-                  <a href="#">{expz.friend_name}</a>
+                  <a href="#">{frind.friend_name}</a>
                 </td>
-                <td>{expz.description}</td>
-                <td><i class="fa fa-inr"></i>{expz.owes_you}</td>
+                <td>{frind.description}</td>
+                <td><i class="fa fa-inr"></i>{frind.owes_you}</td>
               </tr>
             </tbody>
           );
