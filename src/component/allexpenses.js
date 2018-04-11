@@ -25,8 +25,8 @@ class Expenses extends React.Component {
                   <a href="#">{expz.description}</a>
                 </td>
                 <td>{expz.person_name}</td>
-                <td>${expz.you_paid}</td>
-                <td>${expz.you_lent}</td>
+                <td><i class="fa fa-inr"></i>{expz.you_paid}</td>
+                <td><i class="fa fa-inr"></i>{expz.you_lent}</td>
               </tr>
             </tbody>
           );

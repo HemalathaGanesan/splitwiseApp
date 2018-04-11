@@ -1,7 +1,7 @@
 import React from "react";
 import Dashboard from "./dashboard";
 
-export default class Popup extends React.Component {
+export default class AddBillPopup extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -25,20 +25,22 @@ export default class Popup extends React.Component {
         <div className={this.state.popUpBill}>
           <div id="popupContact">
             <div className="text-field">
+            <div className="form">
               <i className="fa fa-close" onClick={this.hide} />
               <h2>Add a bill</h2>
               <hr />
-              <p>
-                With you and:<input
-                  id="name"
-                  placeholder="Email address"
+              <input
+                  id="description"
+                  placeholder="Enter description"
                   type="text"
                 />
-              </p>
+                <input id="amount" placeholder="Enter amount" type="number"/>
+              
               <button onClick={this.hide}>Close</button>
               <button type="button" className="savebtn">
                 Save
               </button>
+              </div>
             </div>
           </div>
         </div>

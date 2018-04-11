@@ -73,7 +73,17 @@ input[type="text"] {
   
   padding: 10px;
   margin-top: 16px;
-  border: 1px solid #ccc;
+  border: 2px solid #3b9b9c;
+  padding-left: 20px;
+  font-size: 16px;
+  font-family: raleway;
+  opacity: .6;
+}
+input[type="number"] {
+  margin-left: 13px;
+  padding: 10px;
+  margin-top: 16px;
+  border: 2px solid #3b9b9c;
   padding-left: 20px;
   font-size: 16px;
   font-family: raleway;
@@ -91,7 +101,7 @@ input[type="text"] {
 .text-field h2{
     font-size: 21px;
     margin-left: -33px;
-    margin-top: 0px;
+    margin-top: 11px;
 }
 .text-field p{
     font-size: 16px;
@@ -157,4 +167,22 @@ button {
   }
   #plus{
     margin-left: 50px;
+  }
+  .form .fa{
+    margin-left: 520px;
+    font-size: large;
+  }
+  .form button{
+    width: 22%;
+    height: 45px;   
+    background-color: #3b9b9c;
+    color: #fff;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 36px;
+  }
+  .card-content  .fa{
+    position: relative;
+    margin-left: 0px;
   }

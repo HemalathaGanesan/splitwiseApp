@@ -34,6 +34,7 @@ class Dashboard extends React.Component {
                     successMessage : 'Friend added successfully....',
                     errorMessage : ''
                 })
+                
             }else{
                 this.setState({
                     errorMessage : 'Your Friend is not registered !!',
@@ -110,6 +111,7 @@ class Dashboard extends React.Component {
                         <h2>Add a Friend</h2>
                         <hr />
                         <p>
+                          
                           Friend Email:<input
                             id="friend_email"
                             placeholder="Email address"
