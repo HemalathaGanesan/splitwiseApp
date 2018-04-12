@@ -35,3 +35,8 @@
 h1{
   font-size: 1.8em;
 }
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: none;
+  color : purple;
+}

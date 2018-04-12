@@ -38,13 +38,12 @@ class Dashboard extends React.Component {
             }else{
                 this.setState({
                     errorMessage : 'Your Friend is not registered !!',
-                    successMessage:''
-        
+                    successMessage:''        
                 })
             }
         })
         this.hide();
-    
+       
   }
   show() {
     this.setState({ popUpBill: "show_popup" });
@@ -122,6 +121,7 @@ class Dashboard extends React.Component {
                         <button type="button" className="savebtn" onClick={this.addFriend.bind(this)}>
                           Save
                         </button>
+                        
                       </div>
                     </div>
                   </div>

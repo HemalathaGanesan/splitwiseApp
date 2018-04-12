@@ -25,7 +25,7 @@ class Friend extends React.Component {
             <tbody>
               <tr>
                 <td>
-                  <a href="#">{data.friend_name}</a>
+                  <a href="#" /* onClick={this.friendDashboard({data.friend_email}).bind(this)} */>{data.friend_name}</a>
                 </td>
                 <td>₹{data.total_balance}</td>
                 <td>₹{data.paid_balance}</td>
