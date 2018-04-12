@@ -11,6 +11,7 @@ class Dashboard extends React.Component {
     };
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
+    
   }
   addFriend () {
     let userEmail = this.props.user.email;
@@ -78,7 +79,7 @@ class Dashboard extends React.Component {
               </Link>
             </li>
             <li>
-              <Link to="/profile">
+              <Link to="/profile"> 
                 <i className="material-icons">person</i>
                 <p>User Profile</p>
               </Link>
@@ -114,7 +115,7 @@ class Dashboard extends React.Component {
                           Friend Email:<input
                             id="friend_email"
                             placeholder="Email address"
-                            type="text"
+                            type="text" onChange={this.updateInput}
                           />
                         </p>
                         <button onClick={this.hide}>Close</button>

@@ -123,8 +123,8 @@ input[type="number"] {
     color: #fff
 }
 
-button {
-  width: 40%;
+ button {
+  /* width: 25%; */
   height: 45px;
   border: 1px solid;
   border-radius: 14px;
@@ -133,6 +133,19 @@ button {
   font-family: "Raleway", sans-serif;
   font-size: 18px;  
   margin-left: 15px;
+  margin-top: 20px;
+}
+.row1 button {
+  width: 20%;
+  height: 45px;
+  border: 1px solid;
+  border-radius: 14px;
+  background-color: #3b9b9c;
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;  
+  margin-left: 15px;
+  margin-top: 20px;
 }
 .hide_popup {
   display: none;
@@ -186,3 +199,29 @@ button {
     position: relative;
     margin-left: 0px;
   }
+  .friend-container{
+    width:100%;
+    text-align: center;
+    height:auto;
+  }
+.friend-table-div{
+  margin:60px 130px;
+  width:70%;
+  height: 400px;
+  box-shadow: 0 5px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #dfdfe2;
+  /* display: flex;
+  justify-content: center; */
+}
+.friend-table{ 
+  margin: 30px;  
+}
+/* .frnd-name:{
+  bottom: 0;
+  height: 100%;
+} */
+.frnd-name .name{
+  background-color: #3b9b9c;
+  border: 1px solid;
+  color: white;  
+}

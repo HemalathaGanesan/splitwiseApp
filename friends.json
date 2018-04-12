@@ -3,19 +3,8 @@
     "friend_name":"nevi",
     "date":"Apr 6",
     "description":"tea",
-    "owes_you":120
-},
-{
-    "friend_name":"rakesh",
-    "date":"Apr 7",
-    "description":"dinner",
-    "owes_you":500
-},
-{
-    "friend_name":"bindu",
-    "date":"Apr 4",
-    "description":"trip",
-    "owes_you":300
+    "you_paid":1000,
+    "you_lend":700
 }
 
 ]
