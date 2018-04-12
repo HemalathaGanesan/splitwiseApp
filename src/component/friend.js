@@ -20,17 +20,17 @@ class Friend extends React.Component {
       })
       .then(friend => {
         console.log(friend);
-        let friend_detail = friend.map(frind => {
-          console.log(frind)
+        let friend_detail = friend.map(data => {
+          console.log(data)
           return (
             <tbody>
               <tr>
-                <td>{frind.date}</td>
                 <td>
-                  <Link to="#">{frind.friend_name}</Link>
+                  <Link to="/popup">{data.friend_name}</Link>
                 </td>
-                <td>{frind.description}</td>
-                <td><i class="fa fa-inr"></i>{frind.owes_you}</td>
+                <td>₹{data.total_balance}</td>
+                <td>₹{data.paid_balance}</td>
+                <td>₹{data.lend_balance}</td>
               </tr>
             </tbody>
           );
@@ -44,7 +44,7 @@ class Friend extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Dashboard />
+        <Dashboard user={this.props.user}/>
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -66,7 +66,7 @@ class Friend extends React.Component {
             </div>
           </nav>
           <div className="content">
-            <AddBillPopup />
+            {/* <AddBillPopup /> */}
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
@@ -78,10 +78,10 @@ class Friend extends React.Component {
                     <div className="card-content table-responsive">
                       <table className="table table-hover">
                       <thead>
-                        <th>Date</th>
-                        <th>Friend Name</th>
-                        <th>Description</th>
-                        <th>owes you</th>
+                        <th>Friends Name</th>
+                        <th>Total Balance</th>
+                        <th>You paid</th>
+                        <th>You lend</th>
                         </thead>
                         {this.state.friends}
                       </table>

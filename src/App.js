@@ -10,6 +10,7 @@ import Profile from "./component/userprofile";
 import Expenses from "./component/allexpenses";
 import Group from "./component/group";
 import Friend from "./component/friend";
+import AddBillPopup from "./component/AddBillpopup"
 
 class App extends React.Component {
   constructor(props){
@@ -56,12 +57,12 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route path="/main" render={() => {return <Dashboard user={this.state.user}/>}} />
             <Route path="/dashboard" render={() => {return <Innerdashboard user={this.state.user}/>}} />
             <Route path="/profile" render={() => {return <Profile user={this.state.user}/>}} />
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
             <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
             <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
+            <Route path="/popup" component={AddBillPopup}/>
           </div>
         </Router>
       </div>

@@ -19,8 +19,8 @@ class Signup extends React.Component{
             email : email,
             password : password
         }
-        console.log(user);
-        fetch('http://localhost:8081/api/signup', {
+
+        fetch('http://localhost:8080/api/signup', {
             method: 'POST',
             body: JSON.stringify(user), // data can be `string` or {object}!
             headers: new Headers({
@@ -44,12 +44,12 @@ class Signup extends React.Component{
         })
        
     }
-    myFunction() {
-        var x = document.getElementById("key");
-        if (x.type === "password") {
-            x.type = "text";
+    showPassword() {
+        var data = document.getElementById("key");
+        if (data.type === "password") {
+            data.type = "text";
         } else {
-            x.type = "password";
+            data.type = "password";
         }
     }
     render(){
@@ -67,11 +67,11 @@ class Signup extends React.Component{
                         <input type="password" className="form-control" id="key" placeholder="Enter password" />
                     </div>
                     <div className="form-group">
-                        <input type="checkbox" onClick={this.myFunction.bind(this)}/>Show Password
+                        <input type="checkbox" onClick={this.showPassword.bind(this)}/>Show Password
                     </div>
                     <button type="submit" className="btn btn-primary btn-sm" onClick={this.createUser.bind(this)}>SignUp</button>
                     <div className = 'success-message'>{this.state.successMessage}</div>
-                    <div className = "alert alert-danger" role="alert">{this.state.errorMessage}</div>
+                    <div className = "error-message">{this.state.errorMessage}</div>
                     <p className='query'>Already registered ? <Link to="/">login</Link></p>
                 </div>
             </div>
