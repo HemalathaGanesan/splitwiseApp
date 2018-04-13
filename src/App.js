@@ -10,7 +10,7 @@ import Profile from "./component/userprofile";
 import Expenses from "./component/allexpenses";
 import Group from "./component/group";
 import Friend from "./component/friend";
-import AddBillPopup from "./component/AddBillpopup"
+import AddBill from "./component/AddBill"
 
 class App extends React.Component {
   constructor(props){
@@ -62,7 +62,7 @@ class App extends React.Component {
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
             <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
             <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
-            <Route path="/popup" component={AddBillPopup}/>
+            <Route path="/friendData" component={AddBill}/>
           </div>
         </Router>
       </div>

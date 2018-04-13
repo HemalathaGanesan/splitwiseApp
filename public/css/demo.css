@@ -167,7 +167,7 @@ input[type="number"] {
      position: absolute; 
     left: 50%;
     top: 17%;
-    margin-left: -202px;
+    margin-left: -315px;
     font-family: "Raleway", sans-serif;
   }
   .fa{
@@ -179,7 +179,9 @@ input[type="number"] {
     display: flex;
   }
   #plus{
-    margin-left: 50px;
+    position: absolute;
+    margin-left: 174px;
+    margin-top: -37px;
   }
   .form .fa{
     margin-left: 520px;
@@ -199,7 +201,7 @@ input[type="number"] {
     position: relative;
     margin-left: 0px;
   }
-  .friend-container{
+  /* .friend-container{
     width:100%;
     text-align: center;
     height:auto;
@@ -210,18 +212,16 @@ input[type="number"] {
   height: 400px;
   box-shadow: 0 5px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #dfdfe2;
-  /* display: flex;
-  justify-content: center; */
 }
 .friend-table{ 
   margin: 30px;  
-}
+} */
 /* .frnd-name:{
   bottom: 0;
   height: 100%;
 } */
-.frnd-name .name{
+/* .frnd-name .name{
   background-color: #3b9b9c;
   border: 1px solid;
   color: white;  
-}
+} */

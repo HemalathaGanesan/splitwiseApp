@@ -1,8 +1,9 @@
 import React from "react";
 import Dashboard from "./dashboard";
-import AddBillPopup from "./AddBillpopup";
-
+import AddBill from "./AddBill";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+
 
 class Friend extends React.Component {
   constructor() {
@@ -11,6 +12,12 @@ class Friend extends React.Component {
       friends: []
     };
   } 
+  friendNameData(cell,row){
+   console.log(row)
+   return(
+     <Link to="/friendData">{row.friend_name}</Link>
+   )
+  }
   componentWillMount() {
       let email=this.props.user.email
       console.log(email)
@@ -20,23 +27,8 @@ class Friend extends React.Component {
       })
       .then(friend => {
         console.log(friend);
-        let friend_detail = friend.map(data => {
-          console.log(data)
-          return (
-            <tbody>
-              <tr>
-                <td>
-                  <Link to="/popup">{data.friend_name}</Link>
-                </td>
-                <td>₹{data.total_balance}</td>
-                <td>₹{data.paid_balance}</td>
-                <td>₹{data.lend_balance}</td>
-              </tr>
-            </tbody>
-          );
-        });
         this.setState({
-          friends: friend_detail
+          friends: friend
         });
         console.log(this.state.friends);
       });
@@ -60,13 +52,13 @@ class Friend extends React.Component {
                   <span className="icon-bar" />
                 </button>
                 <a className="navbar-brand" href="#">
-                  Friends
+                   
                 </a>
               </div>
             </div>
           </nav>
           <div className="content">
-            {/* <AddBillPopup /> */}
+            
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
@@ -76,15 +68,20 @@ class Friend extends React.Component {
                       <p className="category">April 2018</p>
                     </div>
                     <div className="card-content table-responsive">
-                      <table className="table table-hover">
-                      <thead>
-                        <th>Friends Name</th>
-                        <th>Total Balance</th>
-                        <th>You paid</th>
-                        <th>You lend</th>
-                        </thead>
-                        {this.state.friends}
-                      </table>
+                    <BootstrapTable data={this.state.friends} striped hover>
+                    <TableHeaderColumn isKey dataField="friend_name"  dataFormat={this.friendNameData}>
+                Friend Name 
+              </TableHeaderColumn>               
+              <TableHeaderColumn  dataField="total_balance">
+                You paid ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="paid_balance">
+                You lend ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="lend_balance">
+                You lend ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+            </BootstrapTable>
                     </div>
                   </div>
                 </div>

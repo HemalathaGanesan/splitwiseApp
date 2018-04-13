@@ -1,5 +1,6 @@
 import React from "react";
 import Dashboard from "./dashboard";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 class Innerdashboard extends React.Component {
   constructor(props) {
@@ -14,32 +15,13 @@ class Innerdashboard extends React.Component {
         return response.json();
       })
       .then(data => {
-        let val = data.map(amount => {
-          return (
-            <table className="table table-hover">
-              <thead className="text-warning">
-                <th>Total balance</th>
-                <th>You paid</th>
-                <th>You lend</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>${amount.totalbalance}</td>
-                  <td>${amount.you_owe}</td>
-                  <td>${amount.you_are_owed}</td>
-                </tr>
-              </tbody>
-            </table>
-          );
-        });
-
-        this.setState({ dash_amount: val });
+        this.setState({ dash_amount: data });
       });
   }
- render() {
+  render() {
     return (
-      <div className="wrapper">       
-        <Dashboard user={this.props.user}/>
+      <div className="wrapper">
+        <Dashboard user={this.props.user} />
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -86,23 +68,24 @@ class Innerdashboard extends React.Component {
             </div>
           </nav>
           <div className="content">
-            {/* <div className="row1">
-              <a href="#" className="btn btn-primary btn-round">
-                Add bill
-              </a>
-              <a href="#" className="btn btn-primary btn-round">
-                Settle
-              </a>
-            </div> */}
             <div className="row">
               <div className="col-lg-6 ">
                 <div className="card">
                   <div className="card-header" data-background-color="purple">
                     <h4 className="title">User Expenses</h4>
-                    {/* <p className="category">New employees on 15th September, 2016</p> */}
                   </div>
                   <div className="card-content table-responsive">
-                    {this.state.dash_amount}
+                    <BootstrapTable data={this.state.dash_amount} striped hover>
+                      <TableHeaderColumn isKey dataField="totalbalance">
+                        Total Balance
+                      </TableHeaderColumn>
+                      <TableHeaderColumn dataField="you_owe">
+                        You Owe (<i className="fa fa-inr" /> )
+                      </TableHeaderColumn>
+                      <TableHeaderColumn dataField="you_are_owed">
+                        You Are Owed (<i className="fa fa-inr" /> )
+                      </TableHeaderColumn>
+                    </BootstrapTable>
                   </div>
                 </div>
               </div>

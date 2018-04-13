@@ -1,7 +1,8 @@
 import React from "react";
 import Dashboard from "./dashboard";
-import AddBillPopup from "./AddBillpopup";
+import AddBill from "./AddBill";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 class Group extends React.Component {
   constructor() {
@@ -36,11 +37,11 @@ class Group extends React.Component {
                   <a href="#">{expz.description}</a>
                 </td>
                 <td>
-                  <i class="fa fa-inr" />
+                  
                   {expz.you_paid}
                 </td>
                 <td>
-                  <i class="fa fa-inr" />
+                 
                   {expz.you_lent}
                 </td>
               </tr>
@@ -76,7 +77,7 @@ class Group extends React.Component {
             </div>
           </nav>
           <div className="content">
-            <AddBillPopup />
+         
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
@@ -91,8 +92,8 @@ class Group extends React.Component {
                           <th>Date</th>
                           <th>Group Name</th>
                           <th>Description</th>
-                          <th>You paid</th>
-                          <th>You lent</th>
+                          <th>You paid ( <i class="fa fa-inr" /> )</th>
+                          <th>You lent ( <i class="fa fa-inr" /> )</th>
                         </thead>
                         {this.state.groups}
                       </table>
