@@ -24,6 +24,7 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 app.use('/api', require('./routes/api'))
+app.use('/api/groups', require('./routes/groupApi'))
 
 app.listen(port, function (err) {
   if (err) {

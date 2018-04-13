@@ -12,6 +12,7 @@ export default class AddBillPopup extends React.Component {
     };
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
+    //console.log(this.props.data);
   }
   show() {
     console.log("show");

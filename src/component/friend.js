@@ -13,10 +13,9 @@ class Friend extends React.Component {
   }
   pop(row) {
     console.log(row, this.props.user.email);
-    return(
-      <AddBillPopup data = {row}/>
-    )
+
   }
+  
   componentWillMount() {
     let email = this.props.user.email
     console.log(email)
@@ -28,16 +27,19 @@ class Friend extends React.Component {
         console.log(friend);
         let friend_detail = friend.map(data => {
           return (
-            <tbody>
-              <tr>
-                <td>
-                  <a onClick={this.pop.bind(this, data.friend_email)}>{data.friend_name}</a>
-                </td>
-                <td>₹{data.total_balance}</td>
-                <td>₹{data.paid_balance}</td>
-                <td>₹{data.lend_balance}</td>
-              </tr>
-            </tbody>
+            
+              <tbody>
+                <tr>
+                  <td>
+                    <Link onClick={this.pop.bind(this, data.friend_email)} to="/popup">{data.friend_name}</Link>
+                  </td>
+                  <td>₹{data.total}</td>
+                  <td>₹{data.paid}</td>
+                  <td>₹{data.borrowed}</td>
+                </tr>
+              </tbody>
+            
+            
           );
         });
         this.setState({
