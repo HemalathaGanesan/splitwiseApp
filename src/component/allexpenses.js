@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from "./dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 class Expenses extends React.Component {
   constructor() {
@@ -16,22 +17,8 @@ class Expenses extends React.Component {
       })
       .then(expense => {
         console.log(expense);
-        let expense_detail = expense.map(expz => {
-          return (
-            <tbody>
-              <tr>
-                <td>{expz.date}</td>
-                <td>
-                  <a href="#">{expz.description}</a>
-                </td>
-                <td>{expz.person_name}</td>
-                <td><i class="fa fa-inr"></i>{expz.you_paid}</td>
-                <td><i class="fa fa-inr"></i>{expz.you_lent}</td>
-              </tr>
-            </tbody>
-          );
-        });
-        this.setState({ expenses: expense_detail });
+
+        this.setState({ expenses: expense });
         console.log(this.state.expenses);
       });
   }
@@ -39,7 +26,7 @@ class Expenses extends React.Component {
   render() {
     return (
       <div className="wrapper">
-       <Dashboard />
+        <Dashboard />
         <div class="main-panel">
           <nav class="navbar navbar-transparent navbar-absolute">
             <div class="container-fluid">
@@ -70,16 +57,23 @@ class Expenses extends React.Component {
                       <p class="category">April 2018</p>
                     </div>
                     <div class="card-content table-responsive">
-                      <table class="table table-hover">
-                        <thead>
-                          <th>Date</th>
-                          <th>Description</th>
-                          <th>PersonName</th>
-                          <th>You paid</th>
-                          <th>You lent</th>
-                        </thead>
-                        {this.state.expenses}
-                      </table>
+                      <BootstrapTable data={this.state.expenses} striped hover>
+                        <TableHeaderColumn isKey dataField="date">
+                          Date
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="description">
+                          Description
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="person_name">
+                          Person Name
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="you_paid">
+                          You paid ( <i class="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="you_lent">
+                          You lend ( <i class="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                      </BootstrapTable>
                     </div>
                   </div>
                 </div>

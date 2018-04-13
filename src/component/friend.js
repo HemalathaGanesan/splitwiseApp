@@ -1,21 +1,30 @@
 import React from "react";
 import Dashboard from "./dashboard";
-import AddBillPopup from "./AddBillpopup";
-
+import AddBill from "./AddBill";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
+var mail;
 class Friend extends React.Component {
   constructor() {
     super();
     this.state = {
-      friends: []
+      friends: [],
+      friendemail:''
     };
+  } 
+  friendNameData(cell,row){
+    console.log(cell.friend_email)
+   console.log(row.friend_email,'!!!!!!!!!')
+    // mail=row.friend_email
+  //  console.log(email)
+   
+   
+   return(
+     
+     <Link to="/friendData">{row.friend_name}</Link>
+   )
   }
-  pop(row) {
-    console.log(row, this.props.user.email);
-
-  }
-  
   componentWillMount() {
     let email = this.props.user.email
     console.log(email)
@@ -25,29 +34,14 @@ class Friend extends React.Component {
       })
       .then(friend => {
         console.log(friend);
-        let friend_detail = friend.map(data => {
-          return (
-            
-              <tbody>
-                <tr>
-                  <td>
-                    <Link onClick={this.pop.bind(this, data.friend_email)} to="/popup">{data.friend_name}</Link>
-                  </td>
-                  <td>₹{data.total}</td>
-                  <td>₹{data.paid}</td>
-                  <td>₹{data.borrowed}</td>
-                </tr>
-              </tbody>
-            
-            
-          );
-        });
         this.setState({
-          friends: friend_detail
+          friends: friend
         });
       });
   }
+  
   render() {
+    console.log(this.state.friendemail)
     return (
       <div className="wrapper">
         <Dashboard user={this.props.user} />
@@ -66,13 +60,13 @@ class Friend extends React.Component {
                   <span className="icon-bar" />
                 </button>
                 <a className="navbar-brand" href="#">
-                  Friends
+                   
                 </a>
               </div>
             </div>
           </nav>
           <div className="content">
-            {/* <AddBillPopup /> */}
+            
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
@@ -82,15 +76,20 @@ class Friend extends React.Component {
                       <p className="category">April 2018</p>
                     </div>
                     <div className="card-content table-responsive">
-                      <table className="table table-hover">
-                        <thead>
-                          <th>Friends Name</th>
-                          <th>Total Balance</th>
-                          <th>You paid</th>
-                          <th>You lend</th>
-                        </thead>
-                        {this.state.friends}
-                      </table>
+                    <BootstrapTable data={this.state.friends} striped hover >
+                    <TableHeaderColumn isKey dataField="friend_name"  dataFormat={this.friendNameData}>
+                Friend Name 
+              </TableHeaderColumn>               
+              <TableHeaderColumn  dataField="total">
+                Total ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="paid">
+                You paid ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="borrowed">
+                You lend ( <i className="fa fa-inr" /> )
+              </TableHeaderColumn>
+            </BootstrapTable>
                     </div>
                   </div>
                 </div>
