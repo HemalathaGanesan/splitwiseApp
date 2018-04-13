@@ -3,8 +3,8 @@ import Dashboard from "./dashboard";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 export default class AddBill extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       popUpBill: "hide_popup"
     };
@@ -20,6 +20,7 @@ export default class AddBill extends React.Component {
   }
 
   render() {
+    console.log(this.props.match.params.friend_email)
     return (
       <div>
           <FriendsTable show={this.show}/>

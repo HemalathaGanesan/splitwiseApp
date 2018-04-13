@@ -62,7 +62,8 @@ class App extends React.Component {
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
             <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
             <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
-            <Route path="/friendData" component={AddBill}/>
+            {/* <Route path="/friendData" component={AddBill}/> */}
+            <Route path="/friendData/:friend_email" component={AddBill}/>
           </div>
         </Router>
       </div>
