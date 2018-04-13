@@ -23,10 +23,6 @@ class App extends React.Component {
     this.setState({
       user: user
     });
-    console.log('User ',user);
-  }
-  componentDidUpdate(){
-    console.log('user data ', this.state.user);
   }
   render() {
     return (
@@ -62,7 +58,8 @@ class App extends React.Component {
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
             <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
             <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
-            <Route path="/friendData" component={AddBill}/>
+            {/* <Route path="/friendData" component={AddBill}/> */}
+            <Route path="/friendData/:friend_email/:username" component={AddBill} />
           </div>
         </Router>
       </div>

@@ -4,44 +4,39 @@ import AddBill from "./AddBill";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-var mail;
 class Friend extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       friends: [],
       friendemail:''
     };
-  } 
-  friendNameData(cell,row){
-    console.log(cell.friend_email)
-   console.log(row.friend_email,'!!!!!!!!!')
-    // mail=row.friend_email
-  //  console.log(email)
-   
-   
-   return(
-     
-     <Link to="/friendData">{row.friend_name}</Link>
-   )
+  }
+
+  friendNameData(cell, row) {
+    return (
+      <div>
+        <Link to={`/friendData/${row.friend_email}/${this.props.user.email}`}>{row.friend_name}</Link>
+      </div>
+    );
   }
   componentWillMount() {
-    let email = this.props.user.email
-    console.log(email)
+    let email = this.props.user.email;
     fetch(`http://localhost:8080/api/friends/${email}`)
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
       .then(friend => {
-        console.log(friend);
+        var frnds = [];
+        friend.map(m => {
+          frnds.push({ name: m.friend_name, email: m.friend_email });
+        });
         this.setState({
           friends: friend
         });
       });
-  }
-  
+  } 
   render() {
-    console.log(this.state.friendemail)
     return (
       <div className="wrapper">
         <Dashboard user={this.props.user} />
@@ -59,14 +54,11 @@ class Friend extends React.Component {
                   <span className="icon-bar" />
                   <span className="icon-bar" />
                 </button>
-                <a className="navbar-brand" href="#">
-                   
-                </a>
+                <a className="navbar-brand" href="#" />
               </div>
             </div>
           </nav>
           <div className="content">
-            
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
@@ -76,20 +68,24 @@ class Friend extends React.Component {
                       <p className="category">April 2018</p>
                     </div>
                     <div className="card-content table-responsive">
-                    <BootstrapTable data={this.state.friends} striped hover >
-                    <TableHeaderColumn isKey dataField="friend_name"  dataFormat={this.friendNameData}>
-                Friend Name 
-              </TableHeaderColumn>               
-              <TableHeaderColumn  dataField="total">
-                Total ( <i className="fa fa-inr" /> )
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="paid">
-                You paid ( <i className="fa fa-inr" /> )
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="borrowed">
-                You lend ( <i className="fa fa-inr" /> )
-              </TableHeaderColumn>
-            </BootstrapTable>
+                      <BootstrapTable data={this.state.friends} striped hover>
+                        <TableHeaderColumn
+                          isKey
+                          dataField="friend_name"
+                          dataFormat={this.friendNameData.bind(this)}
+                        >
+                          Friend Name
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="total">
+                          Total ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="paid">
+                          You paid ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="borrowed">
+                          You lend ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                      </BootstrapTable>
                     </div>
                   </div>
                 </div>

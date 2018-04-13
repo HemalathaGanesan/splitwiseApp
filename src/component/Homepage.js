@@ -57,20 +57,28 @@ class Homepage extends React.Component {
         return (
             <div className='box'>
                 <div className="login-box">
-                    <h1>LogIn Page</h1>
-                    <div className="form-group">
-                        <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                    <div className="box-header">
+                        <h1>LogIn Page</h1>
                     </div>
-                    <div className="form-group">
-                        <input type="password" className="form-control" id="key" placeholder="Enter password" />
+                    <div className="box-body">
+                        <div className="form-group">
+                            <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                        </div>
+                        <div className="form-group">
+                            <input type="password" className="form-control" id="key" placeholder="Enter password" />
+                        </div>
+                        <div className="form-group">
+                            <input type="checkbox" onClick={this.showPassword.bind(this)} />Show Password
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <input type="checkbox" onClick={this.showPassword.bind(this)}/>Show Password
+                    <div className="box-footer">
+                        <button type="submit" className=" submit" onClick={this.isValidate.bind(this)}>Login</button>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.isValidate.bind(this)}>Login</button>
-                    {this.renderRedirect()}
-                    <div className='error-message'>{this.state.errorMessage}</div>
-                    <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>
+                    <div class="col-md-12">
+                        {this.renderRedirect()}
+                        <div className='error-message'>{this.state.errorMessage}</div>
+                        <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>
+                    </div>
                 </div>
             </div>
         )

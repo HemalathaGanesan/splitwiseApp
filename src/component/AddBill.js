@@ -3,27 +3,71 @@ import Dashboard from "./dashboard";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 export default class AddBill extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      popUpBill: "hide_popup"
+      popUpBill: "hide_popup",
+      friendEmail : '',
+      userEmail : ''
     };
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
   }
   show() {
-    console.log("show");
     this.setState({ popUpBill: "show_popup" });
   }
   hide() {
     this.setState({ popUpBill: "hide_popup" });
   }
+  componentWillMount(){
+    this.setState({
+      friendEmail : this.props.match.params.friend_email,
+      userEmail : this.props.match.params.username
+    })
+  }
+
+  addBill(){
+    let userEmail = this.state.userEmail;
+    let friendEmail = this.state.friendEmail;
+    let amountPaid = document.getElementById('amount').value;
+    let description = document.getElementById('description').value;
+    console.log(userEmail,friendEmail,amountPaid,description)
+    let bill = {
+      friend_email : friendEmail,
+      user_email : userEmail,
+      amount_paid : amountPaid,
+      description : description
+    }
+    console.log(JSON.stringify(bill))
+    fetch('http://localhost:8080/api/addBillWithFriend', {
+        method: 'POST',
+        body: JSON.stringify(bill), // data can be `string` or {object}!
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+    }).then((response) => response.json())
+    .then((response) => {
+        console.log("inside response",response);
+        if(response.status === 'successful'){
+            this.setState({
+                successMessage : 'Bill added successfully....',
+                errorMessage : ''
+            })
+            
+        }else{
+            this.setState({
+                errorMessage : response.status ,
+                successMessage:''        
+            })
+        }
+    })
+    this.hide();      
+  }
 
   render() {
-    console.log()
     return (
       <div>
-          <FriendsTable show={this.show}/>
+          <FriendsTable show={this.show} friend={this.state.friendEmail} user={this.state.userEmail}/>
           {/* <CommonPopup show={this.show} /> */}
           <div className={this.state.popUpBill}>
             <div id="popupContact">
@@ -40,16 +84,14 @@ export default class AddBill extends React.Component {
                   <input id="amount" placeholder="Enter amount" type="number" />
 
                   <button onClick={this.hide}>Close</button>
-                  <button type="button" className="savebtn">
+                  <button type="button" className="savebtn" onClick={this.addBill.bind(this)}>
                     Save
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          </ div>
-       
-      
+        </ div>
     );
   }
 }
@@ -77,6 +119,10 @@ class FriendsTable extends React.Component {
     };
   }
   componentWillMount() {
+    if(this.props.friend!==undefined){
+      console.log(this.props.friend);
+      console.log(this.props.user)
+    }
     return fetch("http://localhost:8080/api/friend")
       .then(response => {
         return response.json();

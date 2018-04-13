@@ -10,13 +10,15 @@ class Innerdashboard extends React.Component {
     };
   }
   componentWillMount() {
-    fetch("http://localhost:8080/api/dash")
+    fetch(`http://localhost:8080/api/userBill/${this.props.user.email}`)
       .then(function(response) {
         return response.json();
       })
       .then(data => {
-        this.setState({ dash_amount: data });
+        console.log(Object.values(data))
+        this.setState({ dash_amount: [data] });
       });
+      
   }
   render() {
     return (
@@ -76,14 +78,14 @@ class Innerdashboard extends React.Component {
                   </div>
                   <div className="card-content table-responsive">
                     <BootstrapTable data={this.state.dash_amount} striped hover>
-                      <TableHeaderColumn isKey dataField="totalbalance">
+                      <TableHeaderColumn isKey dataField="total">
                         Total Balance
                       </TableHeaderColumn>
-                      <TableHeaderColumn dataField="you_owe">
-                        You Owe (<i className="fa fa-inr" /> )
+                      <TableHeaderColumn dataField="borrowed">
+                        You borrowed (<i className="fa fa-inr" /> )
                       </TableHeaderColumn>
-                      <TableHeaderColumn dataField="you_are_owed">
-                        You Are Owed (<i className="fa fa-inr" /> )
+                      <TableHeaderColumn dataField="paid">
+                        You will get (<i className="fa fa-inr" /> )
                       </TableHeaderColumn>
                     </BootstrapTable>
                   </div>
