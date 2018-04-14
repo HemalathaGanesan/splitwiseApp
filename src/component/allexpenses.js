@@ -11,7 +11,7 @@ class Expenses extends React.Component {
     };
   }
   componentWillMount() {
-    fetch("http://localhost:8080/api/expenses")
+    fetch(`http://localhost:8080/api/allExpenses/${this.props.user.email}`)
       .then(response => {
         return response.json();
       })
@@ -61,17 +61,17 @@ class Expenses extends React.Component {
                         <TableHeaderColumn isKey dataField="date">
                           Date
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataField="to_whom">
+                          to whoom
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="from_whom">
+                          from whoom
+                        </TableHeaderColumn>
                         <TableHeaderColumn dataField="description">
-                          Description
+                          Description ( <i class="fa fa-inr" /> )
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField="person_name">
-                          Person Name
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField="you_paid">
-                          You paid ( <i class="fa fa-inr" /> )
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField="you_lent">
-                          You lend ( <i class="fa fa-inr" /> )
+                        <TableHeaderColumn dataField="total_amount">
+                          Total amount ( <i class="fa fa-inr" /> )
                         </TableHeaderColumn>
                       </BootstrapTable>
                     </div>

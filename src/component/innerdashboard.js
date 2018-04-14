@@ -79,7 +79,7 @@ class Innerdashboard extends React.Component {
                   <div className="card-content table-responsive">
                     <BootstrapTable data={this.state.dash_amount} striped hover>
                       <TableHeaderColumn isKey dataField="total">
-                        Total Balance
+                        Total Balance (<i className="fa fa-inr" /> )
                       </TableHeaderColumn>
                       <TableHeaderColumn dataField="borrowed">
                         You borrowed (<i className="fa fa-inr" /> )
