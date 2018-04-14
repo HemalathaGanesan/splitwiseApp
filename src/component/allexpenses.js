@@ -16,10 +16,7 @@ class Expenses extends React.Component {
         return response.json();
       })
       .then(expense => {
-        console.log(expense);
-
         this.setState({ expenses: expense });
-        console.log(this.state.expenses);
       });
   }
 

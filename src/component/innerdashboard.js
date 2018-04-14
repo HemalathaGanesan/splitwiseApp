@@ -15,7 +15,6 @@ class Innerdashboard extends React.Component {
         return response.json();
       })
       .then(data => {
-        console.log(Object.values(data))
         this.setState({ dash_amount: [data] });
       });
       

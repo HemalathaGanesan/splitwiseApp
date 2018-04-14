@@ -74,7 +74,7 @@ class Homepage extends React.Component {
                     <div className="box-footer">
                         <button type="submit" className=" submit" onClick={this.isValidate.bind(this)}>Login</button>
                     </div>
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                         {this.renderRedirect()}
                         <div className='error-message'>{this.state.errorMessage}</div>
                         <p className='query'>Don't have an account ? <Link to="/signup">create account</Link></p>

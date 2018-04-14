@@ -31,14 +31,13 @@ export default class AddBill extends React.Component {
     let friendEmail = this.state.friendEmail;
     let amountPaid = document.getElementById('amount').value;
     let description = document.getElementById('description').value;
-    console.log(userEmail,friendEmail,amountPaid,description)
+
     let bill = {
       friend_email : friendEmail,
       user_email : userEmail,
       amount_paid : amountPaid,
       description : description
     }
-    console.log(JSON.stringify(bill))
     fetch('http://localhost:8080/api/addBillWithFriend', {
         method: 'POST',
         body: JSON.stringify(bill), // data can be `string` or {object}!
@@ -119,18 +118,14 @@ class FriendsTable extends React.Component {
     };
   }
   componentWillMount() {
-    if(this.props.friend!==undefined){
-      console.log(this.props.friend);
-      console.log(this.props.user)
-    }
-    return fetch("http://localhost:8080/api/friend")
+    console.log(this.props.name)
+    return fetch(`http://localhost:8080/api/allExpenses/friends/${this.props.user}/${this.props.friend}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         let frnd_data = data.map(val => {
-          return <h4 key className="title">{val.friend_name}</h4>
+          return 
         });
         this.setState({
           Friend_data: data,
@@ -171,11 +166,11 @@ class FriendsTable extends React.Component {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
-                  <div className="card card-plain">
-                  
+                  <div className="card card-plain">            
                     <div className="card-header" data-background-color="purple">
-                      {this.state.friend_name}                     
-                    </div>
+                        <h4 className="title">Friends details</h4>
+                        <p className="category">April 2018</p>
+                      </div>
                     <div className="card-content table-responsive">
                       {/* <table className="table table-hover"> */}
                       <BootstrapTable data={this.state.Friend_data} striped hover>
@@ -185,11 +180,11 @@ class FriendsTable extends React.Component {
               <TableHeaderColumn dataField="description">
                 Description
               </TableHeaderColumn>
-              <TableHeaderColumn  dataField="you_paid">
-                You paid ( <i className="fa fa-inr" /> )
+              <TableHeaderColumn  dataField="total_amount">
+                Total ( <i className="fa fa-inr" /> )
               </TableHeaderColumn>
-              <TableHeaderColumn dataField="you_lend">
-                You lend ( <i className="fa fa-inr" /> )
+              <TableHeaderColumn dataField="lend">
+                Paid/Lend ( <i className="fa fa-inr" /> )
               </TableHeaderColumn>
             </BootstrapTable>
                       {/* </table> */}

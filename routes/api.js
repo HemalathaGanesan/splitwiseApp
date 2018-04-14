@@ -289,4 +289,20 @@ router.get('/allExpenses/:email', function (req, res) {
   })
 })
 
+router.get('/allExpenses/friends/:user_email/:friend_email', function (req, res) {
+  User.findOne({ email: req.params.user_email }).then((data) => {
+    console.log('AMAN',data);
+    if (data != null) {
+      
+      var expense_list = [...data.paid, ...data.borrowed];
+      var friend_expense = expense_list.filter(result => {
+        if(result.friend_email === req.params.friend_email){
+          return result;
+        }
+      })
+      res.send(friend_expense);
+    }
+  })
+})
+
 module.exports = router
