@@ -14,6 +14,10 @@ router.post('/group', function (req, res) {
   })
 })
 
+router.get('/group/:userId',function(req,res){
+  User.findOne({})
+})
+
 
 
 module.exports = router
