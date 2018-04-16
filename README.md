@@ -1,6 +1,6 @@
-#  split-xpenz
+#  Split-Xpenz
 
-This application is useful for that user which wants to manage their expenses among their friends, roommates and others. This application is capable for  manages all of their expenses and keeps their record in a meaningful way.
+Split-Xpenz is a user-friendly application that makes it easy to split bills with friends and family. We organize all your shared expenses in one place, so that everyone can see who they owe. Whether you are sharing a vacation, splitting rent with roommates, or owe someone for lunch, Splitwise makes life easier.
 
 
 # Getting Started
@@ -10,8 +10,8 @@ This application is useful for that user which wants to manage their expenses am
 | express | react |
 | bcrypt | react-router |
 |jsonwebtoken|material-ui-next|
-| passport|
-| mongoose |  cors|
+| passport|Cors
+| mongoose |
 
 ## Install the dependencies
 ```bash
