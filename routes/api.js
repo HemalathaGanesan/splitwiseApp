@@ -204,62 +204,94 @@ router.post('/addBillWithFriend', function (req, res) {
   var friend_email = req.body.friend_email;
   var amount_paid = req.body.amount_paid;
   var description = req.body.description;
-  var splitBetween = req.body.splitBetween;
+  var split_between = req.body.split_between;
   var paid_by = req.body.paid_by;
-  User.findOne({ email: user_email }).then((data) => {
+  //console.log(split(user_email,friend_email,amount_paid,description));
+  split(user_email,friend_email,amount_paid,description).then((values)=>{
+    if (typeof(values)=== "object"){
+      if(paid_by===user_email){
+        values.paid.lend = values.paid.total_amount / split_between.length;
+        values.borrowed.lend = values.borrowed.total_amount / split_between.length;
+        console.log(values.paid.total_amount," amount ", split_between.length, typeof(split_between))
+        findByIdAndUpdateIt(values.user_id,"paid",values.paid);
+        findByIdAndUpdateIt(values.friend_id,"borrowed",values.borrowed);
+        res.send({
+          status: "Successful"
+        });
+      }else if(paid_by === friend_email){
+        values.paid.lend = values.paid.total_amount / split_between.length;
+        values.borrowed.lend = values.borrowed.total_amount / split_between.length;
+        var payee_name = values.paid.to_whom;
+        var recipent_name = values.borrowed.from_whom;
+        values.paid.to_whom = recipent_name;
+        values.paid.friend_email = user_email;
+        values.borrowed.from_whom = payee_name;
+        values.borrowed.friend_email = friend_email;
+        findByIdAndUpdateIt(values.friend_id,"paid",values.paid);
+        findByIdAndUpdateIt(values.user_id,"borrowed",values.borrowed);
+        res.send({
+          status: "Successful"
+        });
+      } else{
+        res.send('Something went wrong');
+      }
+    }else{
+      res.send(values);
+    }
+  })
+})
+
+function split(user_email,friend_email,amount_paid,description){
+  return User.findOne({ email: user_email }).then((data) => {
     var user = data;
     if (user !== null) {
       var user_id = user._id;
-      User.findOne({ email: friend_email }).then((friend_data) => {
+      return User.findOne({ email: friend_email }).then((friend_data) => {
         if (friend_data !== null) {
           var friend_id = friend_data._id;
           var paid = {
             to_whom: friend_data.username,
             friend_email: friend_email,
             total_amount: amount_paid,
-            lend: amount_paid / 2,
             description: description
           }
           var borrowed = {
             from_whom: user.username,
             friend_email: user_email,
             total_amount: amount_paid,
-            lend: amount_paid / 2,
             description: description
           }
 
-          User.findByIdAndUpdate(user_id,
-            { $push: { paid: paid } },
-            { safe: true, upsert: true },
-            function (err, doc) {
-              if (err) {
-                console.log(err);
-              } else {
-              }
-            }
-          );
-          User.findByIdAndUpdate(friend_id,
-            { $push: { borrowed: borrowed } },
-            { safe: true, upsert: true },
-            function (err, doc) {
-              if (err) {
-                console.log(err);
-              } else {
-              }
-            }
-          );
-          res.send({
-            status: "Successful"
-          });
+          var obj = {
+            user_id : user_id,
+            friend_id : friend_id,
+            paid : paid,
+            borrowed : borrowed
+          }
+          return obj;      
         } else {
-          res.send('Friend not found');
+          return('Friend not found');
         }
       })
     } else {
-      res.send('user not found');
+      return('user not found');
     }
   })
-})
+}
+
+function findByIdAndUpdateIt(id, key, value){
+  var feild = key;
+  User.findByIdAndUpdate(id,
+    { $push: { [feild]: [value] } },
+    { safe: true, upsert: true },
+    function (err, doc) {
+      if (err) {
+        console.log(err);
+      } else {
+      }
+    }
+  );
+}
 
 //overall bill of a user
 router.get('/userBill/:email', function (req, res) {
@@ -294,7 +326,6 @@ router.get('/allExpenses/:email', function (req, res) {
 
 router.get('/allExpenses/friends/:user_email/:friend_email', function (req, res) {
   User.findOne({ email: req.params.user_email }).then((data) => {
-    console.log('AMAN',data);
     if (data != null) {
       
       var expense_list = [...data.paid, ...data.borrowed];
