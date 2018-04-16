@@ -1,9 +1,7 @@
 #  Split-Xpenz
 
-Split-Xpenz is a user-friendly application that makes it easy to split bills with friends and family. We organize all your shared expenses in one place, so that everyone can see who they owe. Whether you are sharing a vacation, splitting rent with roommates, or owe someone for lunch, Splitwise makes life easier.
+Split-Xpenz is a **user-friendly** application that makes it easy to split bills with **friends** and **family**. We organize all your shared expenses in one place, so that everyone can see who they owe. Whether you are sharing a vacation, splitting rent with roommates, or owe someone for lunch, Splitwise makes life easier.
 
-
-# Getting Started
 ## Major Dependencies
 | Server | Client|
 |--|-|
@@ -13,23 +11,22 @@ Split-Xpenz is a user-friendly application that makes it easy to split bills wit
 | passport|Cors
 | mongoose |
 
-## Install the dependencies
+## Install dependencies
 ```bash
-$ npm install
+$ npm i
 ```
 
-## Start Mongo server
+## Start backend server
 ```bash
 $ sudo service mongod start
-$ cd server
-$ node server
+$ node server.js
 ```
-## Run the React server
+## Start react server
 ```bash
 $ npm start
 ```
 
-## People
+## Contributors
 [Vishal Kumar](https://gitlab.com/vishal.kumar3)
 [Aman Kumar](https://gitlab.com/aman.kumar3)
 [Hemalatha](https://gitlab.com/hemaganesan)
