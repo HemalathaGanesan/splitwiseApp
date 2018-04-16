@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 
 class Signup extends React.Component {
     constructor() {
         super();
         this.state = {
-            successMessage: '',
-            errorMessage: ''
+            errorMessage: '',
+            redirect : false
         }
     }
     createUser() {
@@ -30,19 +30,23 @@ class Signup extends React.Component {
             .then((response) => {
                 console.log("inside response", response)
                 if (response.status === 'successful') {
+                    this.props.userData(response.user_data)
                     this.setState({
-                        successMessage: 'Your account has been created successfully....',
-                        errorMessage: ''
+                        errorMessage: '',
+                        redirect : true
                     })
                 } else {
                     this.setState({
-                        errorMessage: 'User already registered !!',
-                        successMessage: ''
-
+                        errorMessage: 'User already registered !!'
                     })
                 }
             })
 
+    }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/dashboard' />
+        }
     }
     showPassword() {
         var data = document.getElementById("key");
@@ -75,7 +79,7 @@ class Signup extends React.Component {
                     </div>
                     <div className="box-footer">
                         <button type="submit" className=" submit" onClick={this.createUser.bind(this)}>SignUp</button>
-                        <div className='success-message'>{this.state.successMessage}</div>
+                        {this.renderRedirect()}
                         <div className="error-message">{this.state.errorMessage}</div>
                         <p className='query'>Already registered ? <Link to="/">login</Link></p>
                     </div>

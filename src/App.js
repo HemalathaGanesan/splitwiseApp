@@ -48,7 +48,7 @@ class App extends React.Component {
                 return (
                   <div>
                     <Header />
-                    <Signup />
+                    <Signup userData={this.getUser.bind(this)}/>
                   </div>
                 );
               }}
