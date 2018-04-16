@@ -94,6 +94,9 @@ class Dashboard extends React.Component {
                 <p>Groups</p>
               </Link>
             </li>
+            <i className="material-icons" id="plus" onClick={this.show}>
+            add circle
+          </i>
             <li>
               <Link to="/friend">
                 <i className="material-icons">group</i>

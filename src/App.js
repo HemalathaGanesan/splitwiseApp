@@ -60,6 +60,8 @@ class App extends React.Component {
             <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
             {/* <Route path="/friendData" component={AddBill}/> */}
             <Route path="/friendData/:friend_email/:username" component={AddBill} />
+            <Route path="/groupData" component={AddBill} />
+
           </div>
         </Router>
       </div>
