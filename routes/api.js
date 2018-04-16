@@ -11,8 +11,11 @@ router.post('/signup', function (req, res) {
         email: req.body.email,
         password: req.body.password
       }).then(() => {
+        return User.findOne({ email: req.body.email })
+      }).then((data) =>{
         res.send({
-          status: 'successful'
+          status: 'successful',
+          user_data: data
         })
       })
     } else {
@@ -102,7 +105,6 @@ async function addFriendToFriendList(friend, user, user_email, friend_email) {
   await User.findOne({ email: friend_email }).then(data => {
     friend_id = data._id
   })
-  console.log(friend_id, 'friends ID');
   await User.findOne({ email: user_email }).then((data) => {
     var user_id = data._id;
     var check;
@@ -144,7 +146,6 @@ async function addFriendToFriendList(friend, user, user_email, friend_email) {
       msg = "Already a friend";
     }
   })
-  console.log(msg, ' Inside msg ---', typeof (msg));
   return msg;
 }
 
@@ -203,6 +204,8 @@ router.post('/addBillWithFriend', function (req, res) {
   var friend_email = req.body.friend_email;
   var amount_paid = req.body.amount_paid;
   var description = req.body.description;
+  var splitBetween = req.body.splitBetween;
+  var paid_by = req.body.paid_by;
   User.findOne({ email: user_email }).then((data) => {
     var user = data;
     if (user !== null) {
