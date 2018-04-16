@@ -118,21 +118,16 @@ class FriendsTable extends React.Component {
     };
   }
   componentWillMount() {
-    console.log(this.props.name)
     return fetch(`http://localhost:8080/api/allExpenses/friends/${this.props.user}/${this.props.friend}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        let frnd_data = data.map(val => {
-          return 
-        });
         this.setState({
-          Friend_data: data,
-          isLoading: false,
-          friend_name: frnd_data
-        });
+        Friend_data: data,
+        isLoading: false,
       });
+    });
   }
   render() {
     if (this.state.isLoading) return <div />;
@@ -168,36 +163,33 @@ class FriendsTable extends React.Component {
                 <div className="col-md-12">
                   <div className="card card-plain">            
                     <div className="card-header" data-background-color="purple">
-                        <h4 className="title">Friends details</h4>
-                        <p className="category">April 2018</p>
-                      </div>
+                      <h4 className="title">Friends details</h4>
+                      <p className="category">April 2018</p>
+                    </div>
                     <div className="card-content table-responsive">
                       {/* <table className="table table-hover"> */}
                       <BootstrapTable data={this.state.Friend_data} striped hover>
-              <TableHeaderColumn isKey dataField="date">
-                Date
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="description">
-                Description
-              </TableHeaderColumn>
-              <TableHeaderColumn  dataField="total_amount">
-                Total ( <i className="fa fa-inr" /> )
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="lend">
-                Paid/Lend ( <i className="fa fa-inr" /> )
-              </TableHeaderColumn>
-            </BootstrapTable>
-                      {/* </table> */}
+                        <TableHeaderColumn isKey dataField="date">
+                          Date
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="description">
+                          Description
+                        </TableHeaderColumn>
+                        <TableHeaderColumn  dataField="total_amount">
+                          Total ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="lend">
+                          Paid/Lend ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                      </BootstrapTable>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
         </div>
-        
       );
     }
   }
