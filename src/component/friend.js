@@ -16,7 +16,7 @@ class Friend extends React.Component {
   friendNameData(cell, row) {
     return (
       <div>
-        <Link to={`/friendData/${row.friend_email}/${this.props.user.email}`}>{row.friend_name}</Link>
+        <Link to={`/friendData/${row.friend_name}/${row.friend_email}/${this.props.user.email}`}>{row.friend_name}</Link>
       </div>
     );
   }

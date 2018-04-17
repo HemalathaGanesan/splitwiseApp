@@ -1,18 +1,62 @@
 import React from "react";
 import Dashboard from "./dashboard";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import { colors } from "material-ui/styles";
+import { black } from "material-ui/styles/colors";
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+
+const styles = {
+    radioButton:{
+      marginBottom: 16,
+      
+    },
+    menuItem:{
+      color:"rgba(125, 17, 125, 0.87)",
+      fontSize:16,
+      fontStyle:"italic",
+      fontWeight:400
+    }
+  
+};
 
 export default class AddBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      value:1,
       popUpBill: "hide_popup",
       friendEmail: "",
-      userEmail: ""
+      userEmail: "",
+      friendName:'',
+      showClass:false,
+      showRadioButton:'split-equalbill'
     };
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
+    this.changeClass = this.changeClass.bind(this);
+    // this.handleChange=this.handleChange.bind(this)
   }
+  changeClass(){
+    if(this.state.showClass){
+      this.setState({
+        showRadioButton:'split-equalbill',
+        showClass:false
+      })
+      
+    }
+    else{
+      this.setState({
+        showRadioButton:'hide_popup',
+        showClass:true
+      })
+    }
+    
+  }
+  handleChange = (event, index, value) => this.setState({value});
+
   show() {
     this.setState({ popUpBill: "show_popup" });
   }
@@ -22,8 +66,10 @@ export default class AddBill extends React.Component {
   componentWillMount() {
     this.setState({
       friendEmail: this.props.match.params.friend_email,
-      userEmail: this.props.match.params.username
+      userEmail: this.props.match.params.username,
+      friendName:this.props.match.params.friend_name
     });
+    // console.log("in friendname",this.props.match.params.friend_name)
   }
 
   addBill() {
@@ -65,13 +111,14 @@ export default class AddBill extends React.Component {
 
   render() {
     return (
+      <MuiThemeProvider>
       <div>
         <FriendsTable
           show={this.show}
           friend={this.state.friendEmail}
           user={this.state.userEmail}
+          friendname={this.state.friendName}
         />
-        {/* <CommonPopup show={this.show} /> */}
         <div className={this.state.popUpBill}>
           <div id="popupContact">
             <div className="text-field">
@@ -85,7 +132,20 @@ export default class AddBill extends React.Component {
                   type="text"
                 />
                 <input id="amount" placeholder="Enter amount" type="number" />
-
+                <div class="bill-dropdown-row">
+                <h5 className="paidbill">paid by</h5>                
+                <div className="bill-dropdown">
+                <DropDownMenu value={this.state.value} onChange={this.handleChange} style={styles.menuItem}>
+          <MenuItem value={1} primaryText="you" />
+          <MenuItem value={2} primaryText={this.state.friendName}/>
+        </DropDownMenu>
+        </div>
+        
+        <h5 className="splitbill">and split</h5>
+        <a  className="split-equally" onClick={this.changeClass} >equally</a>
+        </div>
+        <SplitEqually  showRadioButton={this.state.showRadioButton}/>
+       
                 <button onClick={this.hide}>Close</button>
                 <button
                   type="button"
@@ -99,6 +159,7 @@ export default class AddBill extends React.Component {
           </div>
         </div>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
@@ -117,13 +178,12 @@ class CommonPopup extends React.Component {
 }
 
 class FriendsTable extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       Friend_data: [],
-      isLoading: true,
-      friend_name: []
-    };
+      isLoading: true
+         };
   }
   componentWillMount() {
     // console.log(this.props.name)
@@ -136,19 +196,14 @@ class FriendsTable extends React.Component {
         return response.json();
       })
       .then(data => {
-        let frnd_data = data.map(val => {
-          // console.log(val.to_whom)
-          return val.to_whom;
-        });
         this.setState({
           Friend_data: data,
-          isLoading: false,
-          friend_name: frnd_data
+          isLoading: false             
         });
       });
+      
   }
   render() {
-    // console.log(this.state.friend_name)
     if (this.state.isLoading) return <div />;
     else {
       return (
@@ -183,7 +238,8 @@ class FriendsTable extends React.Component {
                         data-background-color="purple"
                       >
                         <h4 className="title">
-                          {this.state.friend_name.splice(0, 1)}
+                          
+                          {this.props.friendname}
                         </h4>
                         <p className="category">April 2018</p>
                       </div>
@@ -216,5 +272,38 @@ class FriendsTable extends React.Component {
         </div>
       );
     }
+  }
+}
+
+class SplitEqually extends React.Component{
+  constructor(props){
+    super(props)
+    
+  }
+  // changeClass(newclass){
+  //   this.setState({
+  //     showClass:newclass
+  //   })
+  // }
+  render(){
+    return(
+         <div className={this.props.showRadioButton}>
+         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+      <RadioButton
+        value="light"
+        label="username"
+        style={styles.radioButton}
+      />
+       <RadioButton
+        value="not_light"
+        label="friend name"
+        style={styles.radioButton}
+      />
+      </RadioButtonGroup>
+      
+      
+     
+         </div>
+    )
   }
 }

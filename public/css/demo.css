@@ -184,7 +184,7 @@ input[type="number"] {
     margin-top: -37px;
   }
   .form .fa{
-    margin-left: 520px;
+    margin-left: 474px;
     font-size: large;
   }
   .form button{
@@ -201,27 +201,65 @@ input[type="number"] {
     position: relative;
     margin-left: 0px;
   }
-  /* .friend-container{
-    width:100%;
-    text-align: center;
-    height:auto;
+  .bill-dropdown-row{
+    display: flex;
+    margin-top: 17px;
   }
-.friend-table-div{
-  margin:60px 130px;
-  width:70%;
-  height: 400px;
-  box-shadow: 0 5px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #dfdfe2;
-}
-.friend-table{ 
-  margin: 30px;  
-} */
-/* .frnd-name:{
-  bottom: 0;
-  height: 100%;
-} */
-/* .frnd-name .name{
-  background-color: #3b9b9c;
-  border: 1px solid;
-  color: white;  
-} */
+  .paidbill{
+    margin-top: 16px;
+  }
+  .splitbill{
+    margin-top: 16px;
+  }
+  .split-equally{
+    margin-top: 18px;
+    font-size: 18px;
+    margin-left: 14px;
+    font-style: italic;
+  }
+  a:hover, a:focus {
+    color: #439c95;
+  }
+  .split-equalbill{
+    display: block;
+    /*  ransition: margin-top 3s; */
+    margin-left: 216px;
+    }
+  /* .split-equalbill-show{
+    
+    margin-left: 216px;
+  } */
+  /* .bill-dropdown{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 62px;
+  }
+  .add-bill-text{
+    margin-top: 26px;
+  }  
+  .split-bill-text{
+    position: absolute;
+    margin-left: 165px;
+    margin-top: -34px;
+  }
+  .split-radiobutton{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 262px;
+  }
+  .split-equalbil{
+    display: block;
+  }
+  .form .split-equally button{
+    border: none;
+    background-color: white;
+    color: black;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    margin-left: 244px;
+    margin-top: -28px;
+  } */
+  
+  
+ 
