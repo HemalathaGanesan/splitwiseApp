@@ -136,7 +136,7 @@ export default class AddBill extends React.Component {
                 <h5 className="paidbill">paid by</h5>                
                 <div className="bill-dropdown">
                 <DropDownMenu value={this.state.value} onChange={this.handleChange} style={styles.menuItem}>
-          <MenuItem value={1} primaryText="you" />
+          <MenuItem value={1} primaryText="You" />
           <MenuItem value={2} primaryText={this.state.friendName}/>
         </DropDownMenu>
         </div>
