@@ -28,10 +28,6 @@ class Friend extends React.Component {
       })
       .then(friend => {
         console.log(friend)
-        // var frnds = [];
-        // friend.map(m => {
-        //   frnds.push({ name: m.friend_name, email: m.friend_email });
-        // });
         this.setState({
           friends: friend
         });

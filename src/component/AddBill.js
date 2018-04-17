@@ -34,8 +34,7 @@ export default class AddBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
-      value:1,
+      paid_by : '',
       popUpBill: "hide_popup",
       friendEmail: "",
       userEmail: "",
@@ -46,7 +45,7 @@ export default class AddBill extends React.Component {
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
     this.changeClass = this.changeClass.bind(this);
-    // this.handleChange=this.handleChange.bind(this)
+    this.handleChange=this.handleChange.bind(this);
   }
   
   changeClass(){
@@ -65,7 +64,9 @@ export default class AddBill extends React.Component {
     }
     
   }
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange (event, index, value){
+    return this.setState({ paid_by : value })
+  }
 
   show() {
     this.setState({ popUpBill: "show_popup" });
@@ -79,7 +80,6 @@ export default class AddBill extends React.Component {
       userEmail: this.props.match.params.username,
       friendName:this.props.match.params.friend_name
     });
-    console.log("in friendname",this.props.match.params.friend_name)
   }
 
   addBill() {
@@ -87,12 +87,21 @@ export default class AddBill extends React.Component {
     let friendEmail = this.state.friendEmail;
     let amountPaid = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
+    
+    let checkboxes = document.querySelectorAll('input[name="user"]:checked');
+    let checkboxValues = [];
+    Array.prototype.forEach.call(checkboxes, function(ele) {
+      checkboxValues.push(ele.value);
+    });
+    let split_between = checkboxValues
 
     let bill = {
-      friend_email: friendEmail,
-      user_email: userEmail,
-      amount_paid: amountPaid,
-      description: description
+      friend_email : friendEmail,
+      user_email : userEmail,
+      amount_paid : amountPaid,
+      description : description,
+      split_between : split_between,
+      paid_by : this.state.paid_by
     };
     fetch("http://localhost:8080/api/addBillWithFriend", {
       method: "POST",
@@ -103,7 +112,7 @@ export default class AddBill extends React.Component {
     })
       .then(response => response.json())
       .then(response => {
-        // console.log("inside response",response);
+        console.log(response);
         if (response.status === "successful") {
           this.setState({
             successMessage: "Bill added successfully....",
@@ -145,16 +154,21 @@ export default class AddBill extends React.Component {
                 <div class="bill-dropdown-row">
                 <h5 className="paidbill">paid by</h5>                
                 <div className="bill-dropdown">
-                <DropDownMenu value={this.state.value} onChange={this.handleChange} style={styles.menuItem}>
-          <MenuItem value={1} primaryText="You" />
-          <MenuItem value={2} primaryText={this.state.friendName}/>
-        </DropDownMenu>
-        </div>
+                  <DropDownMenu  value={this.state.value} onChange={this.handleChange} style={styles.menuItem}>
+                    <MenuItem value={this.state.userEmail} primaryText="You" />
+                    <MenuItem value={this.state.friendEmail} primaryText={this.state.friendName}/>
+                  </DropDownMenu>
+                </div>
         
         <h5 className="splitbill">and split</h5>
         <a  className="split-equally" onClick={this.changeClass} >equally</a>
         </div>
-        <SplitEqually  showRadioButton={this.state.showRadioButton}/>
+        <SplitEqually
+          showRadioButton={this.state.showRadioButton}
+          friendname={this.state.friendName}
+          friendEmail={this.state.friendEmail}
+          userEmail={this.state.userEmail}
+          />
        
                 <button onClick={this.hide}>Close</button>
                 <button
@@ -291,8 +305,7 @@ class SplitEqually extends React.Component{
     this.state={
       checked: true
     }
-    this.updateCheck=this.updateCheck.bind(this)
-    
+    this.updateCheck=this.updateCheck.bind(this)    
   }
   updateCheck() {
     this.setState({
@@ -304,8 +317,8 @@ class SplitEqually extends React.Component{
     return(
          <div className={this.props.showRadioButton}>
          <div class="checkboxdiv">
-         <input type="checkbox" onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>username</p><br/>
-         <input type="checkbox" onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>friendname</p>
+         <input type="checkbox" name = "user" value={this.props.userEmail} onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>You</p><br/>
+         <input type="checkbox" name = "user" value={this.props.friendEmail} onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>{this.props.friendname}</p>
 
          {/* <Checkbox
           label="username"

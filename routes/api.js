@@ -216,7 +216,8 @@ router.post('/addBillWithFriend', function (req, res) {
         findByIdAndUpdateIt(values.user_id,"paid",values.paid);
         findByIdAndUpdateIt(values.friend_id,"borrowed",values.borrowed);
         res.send({
-          status: "Successful"
+          status: "Successful",
+          message : "Your bill was added successfully"
         });
       }else if(paid_by === friend_email){
         values.paid.lend = values.paid.total_amount / split_between.length;
