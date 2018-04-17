@@ -25,7 +25,7 @@ class Profile extends React.Component {
                   Profile
                 </a>
               </div>
-              <div className="collapse navbar-collapse">
+              {/* <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
                   <li className="dropdown">
                     <a
@@ -48,8 +48,8 @@ class Profile extends React.Component {
                       <p className="hidden-lg hidden-md">Profile</p>
                     </a>
                   </li>
-                </ul>
-              </div>
+                </ul> 
+              </div>*/}
             </div>
           </nav>
           <div className="content">

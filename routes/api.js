@@ -204,11 +204,6 @@ router.post('/addBillWithFriend', function (req, res) {
   var friend_email = req.body.friend_email;
   var amount_paid = req.body.amount_paid;
   var description = req.body.description;
-<<<<<<< HEAD
-  var splitBetween = req.body.splitBetween;
-  var paid_by = req.body.paid_by;
-  User.findOne({ email: user_email }).then((data) => {
-=======
   var split_between = req.body.split_between;
   var paid_by = req.body.paid_by;
   //console.log(split(user_email,friend_email,amount_paid,description));
@@ -248,7 +243,6 @@ router.post('/addBillWithFriend', function (req, res) {
 
 function split(user_email,friend_email,amount_paid,description){
   return User.findOne({ email: user_email }).then((data) => {
->>>>>>> de36965e4d056ed28999b9b40972fcbf8b5dc105
     var user = data;
     if (user !== null) {
       var user_id = user._id;
