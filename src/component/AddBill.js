@@ -7,6 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import { colors } from "material-ui/styles";
 import { black } from "material-ui/styles/colors";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
 
 const styles = {
     radioButton:{
@@ -18,7 +19,14 @@ const styles = {
       fontSize:16,
       fontStyle:"italic",
       fontWeight:400
-    }
+     
+    },
+    underlineStyle:{
+      border:"none"
+    },
+    checkbox: {
+      marginBottom: 16,
+    },
   
 };
 
@@ -26,6 +34,7 @@ export default class AddBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      
       value:1,
       popUpBill: "hide_popup",
       friendEmail: "",
@@ -39,6 +48,7 @@ export default class AddBill extends React.Component {
     this.changeClass = this.changeClass.bind(this);
     // this.handleChange=this.handleChange.bind(this)
   }
+  
   changeClass(){
     if(this.state.showClass){
       this.setState({
@@ -69,7 +79,7 @@ export default class AddBill extends React.Component {
       userEmail: this.props.match.params.username,
       friendName:this.props.match.params.friend_name
     });
-    // console.log("in friendname",this.props.match.params.friend_name)
+    console.log("in friendname",this.props.match.params.friend_name)
   }
 
   addBill() {
@@ -278,28 +288,42 @@ class FriendsTable extends React.Component {
 class SplitEqually extends React.Component{
   constructor(props){
     super(props)
+    this.state={
+      checked: true
+    }
+    this.updateCheck=this.updateCheck.bind(this)
     
   }
-  // changeClass(newclass){
-  //   this.setState({
-  //     showClass:newclass
-  //   })
-  // }
+  updateCheck() {
+    this.setState({
+      checked:!this.state.checked
+    })
+  }
+ 
   render(){
     return(
          <div className={this.props.showRadioButton}>
-         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-      <RadioButton
-        value="light"
-        label="username"
-        style={styles.radioButton}
-      />
-       <RadioButton
-        value="not_light"
-        label="friend name"
-        style={styles.radioButton}
-      />
-      </RadioButtonGroup>
+         <div class="checkboxdiv">
+         <input type="checkbox" onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>username</p><br/>
+         <input type="checkbox" onChange={this.updateCheck} defaultChecked={this.state.checked}/> <p>friendname</p>
+
+         {/* <Checkbox
+          label="username"
+          checked={this.state.checked}
+          onCheck={this.updateCheck}
+          style={styles.checkbox}
+        />
+        </div>
+        <div className="check2">
+        <Checkbox
+          label="friendname"
+          checked={this.state.checked}
+          onCheck={this.updateCheck}
+          style={styles.checkbox}
+        /> */}
+
+        </div>
+      
       
       
      
