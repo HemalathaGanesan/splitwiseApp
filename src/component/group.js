@@ -9,16 +9,24 @@ class Group extends React.Component {
     super();
     this.state = {
       groups: [],
-      popUpBill: "hide_popup"
+      // popUpBill: "hide_popup"
     };
-    this.show = this.show.bind(this);
-    this.hide = this.hide.bind(this);
+    // this.show = this.show.bind(this);
+    // this.hide = this.hide.bind(this);
   }
-  show() {
-    this.setState({ popUpBill: "show_popup" });
-  }
-  hide() {
-    this.setState({ popUpBill: "hide_popup" });
+  // show() {
+  //   this.setState({ popUpBill: "show_popup" });
+  // }
+  // hide() {
+  //   this.setState({ popUpBill: "hide_popup" });
+  // }
+
+  GroupNameData(cell, row) {
+    return (
+      <div>
+        <Link to="/groupData">{row.group_name}</Link>
+      </div>
+    );
   }
   componentWillMount() {
     fetch("http://localhost:8080/api/group")
@@ -26,36 +34,15 @@ class Group extends React.Component {
         return response.json();
       })
       .then(group => {
-        console.log(group);
-        let group_detail = group.map(expz => {
-          return (
-            <tbody>
-              <tr>
-                <td>{expz.date}</td>
-                <td>{expz.group_name}</td>
-                <td>
-                  <a href="#">{expz.description}</a>
-                </td>
-                <td>
-                  
-                  {expz.you_paid}
-                </td>
-                <td>
-                 
-                  {expz.you_lent}
-                </td>
-              </tr>
-            </tbody>
-          );
-        });
-        this.setState({ groups: group_detail });
+        console.log(group);       
+        this.setState({ groups: group });
         console.log(this.state.groups);
       });
   }
   render() {
     return (
       <div className="wrapper">
-        <Dashboard />
+        <Dashboard  user={this.props.user} />
         <div className="main-panel">
           <nav className="navbar navbar-transparent navbar-absolute">
             <div className="container-fluid">
@@ -87,7 +74,28 @@ class Group extends React.Component {
                       <p className="category">April 2018</p>
                     </div>
                     <div className="card-content table-responsive">
-                      <table className="table table-hover">
+                    <BootstrapTable data={this.state.groups} striped hover>
+                        <TableHeaderColumn
+                          isKey
+                          dataField="group_name"
+                          dataFormat={this.GroupNameData.bind(this)}
+                        >
+                          Group Name
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="date">
+                          Date 
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="description">
+                          Description 
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="you_paid">
+                          You paid ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField="you_lent">
+                          You lend ( <i className="fa fa-inr" /> )
+                        </TableHeaderColumn>
+                      </BootstrapTable>
+                      {/* <table className="table table-hover">
                         <thead>
                           <th>Date</th>
                           <th>Group Name</th>
@@ -96,7 +104,7 @@ class Group extends React.Component {
                           <th>You lent ( <i class="fa fa-inr" /> )</th>
                         </thead>
                         {this.state.groups}
-                      </table>
+                      </table> */}
                     </div>
                   </div>
                 </div>

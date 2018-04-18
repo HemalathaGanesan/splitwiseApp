@@ -16,21 +16,20 @@ class Friend extends React.Component {
   friendNameData(cell, row) {
     return (
       <div>
-        <Link to={`/friendData/${row.friend_email}/${this.props.user.email}`}>{row.friend_name}</Link>
+        <Link to={`/friendData/${row.friend_name}/${row.friend_email}/${this.props.user.email}`}>{row.friend_name}</Link>
       </div>
     );
   }
   componentWillMount() {
     let email = this.props.user.email;
+    if(email===undefined){
+      email = document.cookie.email
+    }
     fetch(`http://localhost:8080/api/friends/${email}`)
       .then(response => {
         return response.json();
       })
       .then(friend => {
-        var frnds = [];
-        friend.map(m => {
-          frnds.push({ name: m.friend_name, email: m.friend_email });
-        });
         this.setState({
           friends: friend
         });
