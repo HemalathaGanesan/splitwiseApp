@@ -1,52 +1,116 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../Models/user');
+const config = require('../config/main');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 //req{username,email,password}. return succeful or unsuccessful.
+// router.post('/signup', function (req, res) {
+//   User.findOne({ email: req.body.email }).then((data) => {
+//     if (data === null) {
+//       User.create({
+//         username: req.body.username,
+//         email: req.body.email,
+//         password: req.body.password
+//       }).then(() => {
+//         return User.findOne({ email: req.body.email })
+//       }).then((data) =>{
+//         res.send({
+//           status: 'successful',
+//           user_data: data
+//         })
+//       })
+//     } else {
+//       res.send({
+//         status: 'Unsuccessful'
+//       })
+//     }
+//   });
+// })
+
 router.post('/signup', function (req, res) {
-  User.findOne({ email: req.body.email }).then((data) => {
-    if (data === null) {
-      User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      }).then(() => {
-        return User.findOne({ email: req.body.email })
-      }).then((data) =>{
+  if (!req.body.email || !req.body.username || !req.body.password) {
+    res.json({ success: false, message: 'please enter email and password to register.' });
+  } else {
+    var newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    newUser.save(function (err) {
+      if (err) {
+        return res.json({ success: false, message: 'this email already exist.' })
+      }
+      User.findOne({ email: req.body.email }).then((data) => {
+        let token = jwt.sign(data.toJSON(), config.secret, {
+          expiresIn: 10000
+        });
         res.send({
           status: 'successful',
-          user_data: data
+          user_data: data,
+          token:token
         })
-      })
-    } else {
-      res.send({
-        status: 'Unsuccessful'
-      })
-    }
-  });
-})
+      });
+    });
+  }
+});
 
 //req{email,password}, return success message with userdata
-router.post('/login', function (req, res) {
-  let email = req.body.email;
-  let password = req.body.password;
-  User.findOne({ email: email }).then((data) => {
-    if (email === data.email && password === data.password) {
-      res.send({
-        status: 'successful',
-        user_data: data
-      })
+// router.post('/login', function (req, res) {
+//   let email = req.body.email;
+//   let password = req.body.password;
+//   User.findOne({ email: email }).then((data) => {
+//     if (email === data.email && password === data.password) {
+//       res.send({
+//         status: 'successful',
+//         user_data: data
+//       })
+//     } else {
+//       res.send({
+//         status: 'error'
+//       })
+//     }
+//   }).catch((err) => {
+//     res.send({
+//       status: err
+//     })
+//   })
+// })
+
+router.post("/login", function (req, res) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (err) throw err;
+
+    if (!user) {
+      res.json({ success: false, message: 'Authentication failed. User not found' });
     } else {
-      res.send({
-        status: 'error'
-      })
+      user.comparePassword(req.body.password, function (err, isMatch) {
+        if (isMatch && !err) {
+          let token = jwt.sign(user.toJSON(), config.secret, {
+            expiresIn: 10000
+          });
+          User.findOne({ email: req.body.email }).then((data) => {
+            res.json({
+              status: 'successful',
+              user_data: data, 
+              token: token 
+            })
+          });
+          //res.json({ success: true, token: token });
+        } else {
+          res.json({ success: false, message: 'Authentication failed. Password did not match' });
+        }
+      });
     }
-  }).catch((err) => {
-    res.send({
-      status: err
-    })
   })
-})
+});
+
+router.get('/check', passport.authenticate('jwt', { session: false }), function (req, res) {
+  console.log("called");
+  res.send('wooowww it worked');
+});
 
 //req{email} return user detail
 router.get('/user', function () {
@@ -163,10 +227,10 @@ router.get('/friends/:email', function (req, res) {
           return frnd;
         })
       }))
-      .then( result => {
-         res.send(result);
-      })
-      
+        .then(result => {
+          res.send(result);
+        })
+
     } else {
       res.send("User not found");
     }
@@ -206,19 +270,17 @@ router.post('/addBillWithFriend', function (req, res) {
   var description = req.body.description;
   var split_between = req.body.split_between;
   var paid_by = req.body.paid_by;
-  //console.log(split(user_email,friend_email,amount_paid,description));
-  split(user_email,friend_email,amount_paid,description).then((values)=>{
-    if (typeof(values)=== "object"){
-      if(paid_by===user_email){
+  split(user_email, friend_email, amount_paid, description).then((values) => {
+    if (typeof (values) === "object") {
+      if (paid_by === user_email) {
         values.paid.lend = values.paid.total_amount / split_between.length;
         values.borrowed.lend = values.borrowed.total_amount / split_between.length;
-        console.log(values.paid.total_amount," amount ", split_between.length, typeof(split_between))
-        findByIdAndUpdateIt(values.user_id,"paid",values.paid);
-        findByIdAndUpdateIt(values.friend_id,"borrowed",values.borrowed);
+        findByIdAndUpdateIt(values.user_id, "paid", values.paid);
+        findByIdAndUpdateIt(values.friend_id, "borrowed", values.borrowed);
         res.send({
           status: "Successful"
         });
-      }else if(paid_by === friend_email){
+      } else if (paid_by === friend_email) {
         values.paid.lend = values.paid.total_amount / split_between.length;
         values.borrowed.lend = values.borrowed.total_amount / split_between.length;
         var payee_name = values.paid.to_whom;
@@ -227,21 +289,21 @@ router.post('/addBillWithFriend', function (req, res) {
         values.paid.friend_email = user_email;
         values.borrowed.from_whom = payee_name;
         values.borrowed.friend_email = friend_email;
-        findByIdAndUpdateIt(values.friend_id,"paid",values.paid);
-        findByIdAndUpdateIt(values.user_id,"borrowed",values.borrowed);
+        findByIdAndUpdateIt(values.friend_id, "paid", values.paid);
+        findByIdAndUpdateIt(values.user_id, "borrowed", values.borrowed);
         res.send({
           status: "Successful"
         });
-      } else{
+      } else {
         res.send('Something went wrong');
       }
-    }else{
+    } else {
       res.send(values);
     }
   })
 })
 
-function split(user_email,friend_email,amount_paid,description){
+function split(user_email, friend_email, amount_paid, description) {
   return User.findOne({ email: user_email }).then((data) => {
     var user = data;
     if (user !== null) {
@@ -263,23 +325,23 @@ function split(user_email,friend_email,amount_paid,description){
           }
 
           var obj = {
-            user_id : user_id,
-            friend_id : friend_id,
-            paid : paid,
-            borrowed : borrowed
+            user_id: user_id,
+            friend_id: friend_id,
+            paid: paid,
+            borrowed: borrowed
           }
-          return obj;      
+          return obj;
         } else {
-          return('Friend not found');
+          return ('Friend not found');
         }
       })
     } else {
-      return('user not found');
+      return ('user not found');
     }
   })
 }
 
-function findByIdAndUpdateIt(id, key, value){
+function findByIdAndUpdateIt(id, key, value) {
   var feild = key;
   User.findByIdAndUpdate(id,
     { $push: { [feild]: [value] } },
@@ -315,7 +377,7 @@ router.get('/userBill/:email', function (req, res) {
 
 //req{email} return all expense for that user
 
-router.get('/allExpenses/:email', function (req, res) {
+router.get('/allExpenses/:email', passport.authenticate('jwt', { session: false }), function (req, res) {
   User.findOne({ email: req.params.email }).then((data) => {
     if (data != null) {
       var expense_list = [...data.paid, ...data.borrowed];
@@ -327,10 +389,10 @@ router.get('/allExpenses/:email', function (req, res) {
 router.get('/allExpenses/friends/:user_email/:friend_email', function (req, res) {
   User.findOne({ email: req.params.user_email }).then((data) => {
     if (data != null) {
-      
+
       var expense_list = [...data.paid, ...data.borrowed];
       var friend_expense = expense_list.filter(result => {
-        if(result.friend_email === req.params.friend_email){
+        if (result.friend_email === req.params.friend_email) {
           return result;
         }
       })

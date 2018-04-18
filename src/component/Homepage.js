@@ -11,7 +11,6 @@ class Homepage extends React.Component {
         }
     }
     isValidate() {
-        let scope = this;
         const email = document.getElementById('email').value;
         const password = document.getElementById('key').value;
         let data = {
@@ -27,7 +26,9 @@ class Homepage extends React.Component {
         }).then((response) => response.json())
             .then((response) => {
                 if (response.status === 'successful') {
-                    scope.props.userData(response.user_data)
+                    this.props.userData(response.user_data)
+                    localStorage.setItem('jwt-token', response.token)
+                    localStorage.setItem('user_data', JSON.stringify(response.user_data))
                     //window.location.href='/dashboard'
                     this.setState({
                         redirect: true

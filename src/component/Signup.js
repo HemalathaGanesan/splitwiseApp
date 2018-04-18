@@ -34,6 +34,8 @@ class Signup extends React.Component {
                         successMessage: 'Your account has been created successfully....',
                         errorMessage: ''
                     })
+                    localStorage.setItem('jwt-token', response.token)
+                    localStorage.setItem('user_data', JSON.stringify(response.user_data))
                 } else {
                     this.setState({
                         errorMessage: 'User already registered !!',
@@ -41,6 +43,7 @@ class Signup extends React.Component {
 
                     })
                 }
+                console.log(localStorage.getItem('user_data'));
             })
 
     }

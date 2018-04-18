@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin", "*");
@@ -9,8 +10,12 @@ app.use(function(req,res,next){
   next();
 });
 
+app.use(passport.initialize());
+
 const routes=require('./routers/api')
 app.use('/api',routes);
+
+require('./config/passport')(passport);
 
 mongoose.connect('mongodb://localhost/splitxpenz');
 mongoose.connection.once('open',function(){
