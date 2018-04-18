@@ -29,11 +29,10 @@ class Dashboard extends React.Component {
     })
       .then(response => response.json())
       .then(response => {
-        console.log("inside response", response);
         if (response.status === "successful") {
           this.setState({
             successMessage: "Friend added successfully....",
-            errorMessage: ""
+            errorMessage: "",
           });
         } else {
           this.setState({
@@ -41,6 +40,8 @@ class Dashboard extends React.Component {
             successMessage: ""
           });
         }
+        this.props.addFriendSuccess(this.state.successMessage);
+        //this.props.addFriendFailure(this.state.errorMessage);
       });
     this.hide();
   }
@@ -50,12 +51,6 @@ class Dashboard extends React.Component {
   hide() {
     this.setState({ popUpBill: "hide_popup" });
   }
-
-  /* componentDidMount(){
-    console.log('dashboard mounted')
-    console.log(this.props.user)
-    this.setState({user: this.props.user})
-  } */
   render() {
     return (
       <div

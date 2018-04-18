@@ -16,7 +16,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      message : ''
     }
   }
   getUser(user){
@@ -24,7 +25,13 @@ class App extends React.Component {
       user: user
     });
   }
+  getMessage(message){
+    this.setState({
+      message : message
+    })
+  }
   render() {
+    console.log(this.state.message)
     return (
       <div className="App">
         <Router>
@@ -57,7 +64,7 @@ class App extends React.Component {
             <Route path="/profile"  render={() => {return <Profile user={this.state.user}/>}} />
             <Route path="/expenses" render={() => {return <Expenses user={this.state.user}/>}} />
             <Route path="/group" render={() => {return <Group user={this.state.user}/>}} />
-            <Route path="/friend" render={() => {return <Friend user={this.state.user}/>}} />
+            <Route path="/friend" render={() => {return <Friend user={this.state.user} addFriendSuccess={this.getMessage.bind(this)}/>}} />
             {/* <Route path="/friendData" component={AddBill}/> */}
             <Route path="/friendData/:friend_name/:friend_email/:username" component={AddBill} />
             <Route path="/groupData" component={AddBill} />

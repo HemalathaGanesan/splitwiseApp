@@ -22,12 +22,14 @@ class Friend extends React.Component {
   }
   componentWillMount() {
     let email = this.props.user.email;
+    if(email===undefined){
+      email = document.cookie.email
+    }
     fetch(`http://localhost:8080/api/friends/${email}`)
       .then(response => {
         return response.json();
       })
       .then(friend => {
-        console.log(friend)
         this.setState({
           friends: friend
         });

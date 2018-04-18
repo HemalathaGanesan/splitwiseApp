@@ -27,7 +27,7 @@ class Homepage extends React.Component {
         }).then((response) => response.json())
             .then((response) => {
                 if (response.status === 'successful') {
-                    scope.props.userData(response.user_data)
+                    scope.props.userData(response.user_data);
                     //window.location.href='/dashboard'
                     this.setState({
                         redirect: true
